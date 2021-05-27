@@ -6,11 +6,14 @@ const Success: FunctionComponent = () => {
   const router = useRouter()
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       router.push({
         pathname: '/thank-you'
       }).catch(e => console.error(e))
     }, 5000)
+    return () => {
+      clearTimeout(timeOut)
+    }
   }, [])
 
   return (
