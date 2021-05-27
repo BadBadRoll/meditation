@@ -1,7 +1,18 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import styles from '../styles/success.module.css'
+import { useRouter } from 'next/router'
 
 const Success: FunctionComponent = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.push({
+        pathname: '/thank-you'
+      }).catch(e => console.error(e))
+    }, 5000)
+  }, [])
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>

@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-import { HiOutlineBackspace } from "react-icons/hi"
+import { HiOutlineBackspace } from 'react-icons/hi'
 import { useRouter } from 'next/router'
 
 import styles from 'styles/input.module.css'
@@ -12,36 +12,46 @@ const CodeInput: FunctionComponent = () => {
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
-    if(code.length === 6){
+    if (code.length === 6) {
       setLoading(true)
     }
   }, [code])
 
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        router.push({
+          pathname: '/success'
+        }).catch(e => console.error(e))
+      }, 3000)
+    }
+  }, [loading])
+
   const onChange = (input: string): void => {
-    if(loading){
+    if (loading) {
       return
     }
-    if(code.length < 6){
+    if (code.length < 6) {
       setFailed(false)
       setCode(code + input)
     }
   }
 
-  const onKeyPress = (button: string) => {
-    if(!loading){
+  const onKeyPress = (button: string): void => {
+    if (!loading) {
       setCode(code.slice(0, -1))
     }
   }
 
   const renderCode = (idx: number): any => {
-    if(loading){
-      return  <Spin size='large' />
+    if (loading) {
+      return <Spin size='large' />
     } else {
-      if(code[idx + 1] !== undefined){
+      if (code[idx + 1] !== undefined) {
         return '*'
       } else {
         return code[idx]
-      } 
+      }
     }
   }
 
@@ -50,7 +60,8 @@ const CodeInput: FunctionComponent = () => {
       pathname: '/success'
     }).catch(e => console.error(e))
   }
-  const handleFail = ():void => {
+
+  const handleFail = (): void => {
     setCode('')
     setLoading(false)
     setFailed(true)
@@ -59,7 +70,7 @@ const CodeInput: FunctionComponent = () => {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-      <img src='/input.png' alt='input' width='500' />
+        <img src='/input.png' alt='input' width='500' />
         <div className={styles.input}>
           {
             failed ? (
@@ -72,13 +83,13 @@ const CodeInput: FunctionComponent = () => {
               </p>
             )
           }
-          <div className={styles.confirmationCode}> 
+          <div className={styles.confirmationCode}>
             <button className={styles.codeBox}>{renderCode(0)}</button>
             <button className={styles.codeBox}>{renderCode(1)}</button>
             <button className={styles.codeBox}>{renderCode(2)}</button>
             <button className={styles.codeBox}>{renderCode(3)}</button>
             <button className={styles.codeBox}>{renderCode(4)}</button>
-            <button className={styles.codeBox}>{loading ? <Spin size='large' /> :  code[5]}</button>
+            <button className={styles.codeBox}>{loading ? <Spin size='large' /> : code[5]}</button>
           </div>
           <div className={styles.keyboard}>
             <div className={styles.keyboardRow}>
@@ -98,14 +109,14 @@ const CodeInput: FunctionComponent = () => {
             </div>
             <div className={styles.keyboardRow}>
               <span
-                style={{ backgroundColor: '#efefef'}}
+                style={{ backgroundColor: '#efefef' }}
                 className={styles.keyButton}
                 onClick={handleSuccess}
               />
               <Key label='0' onChange={onChange} />
               <span
                 className={styles.keyButton}
-                style={{ color: 'red'}}
+                style={{ color: 'red' }}
                 onClick={() => onKeyPress('del')}
               >
                 <HiOutlineBackspace />
@@ -113,7 +124,7 @@ const CodeInput: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <div className={styles.confirmationCode}> 
+        <div className={styles.confirmationCode}>
           <button onClick={handleSuccess}>success</button>
           <button onClick={handleFail}>fail</button>
         </div>
@@ -130,4 +141,3 @@ const Key: FunctionComponent<KeyProp> = (props) => {
 }
 
 export default CodeInput
-
