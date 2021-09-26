@@ -8,14 +8,22 @@
     "start:prod": "next start -p 3002"
   },
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@mui/material": "^5.0.1",
     "antd": "^4.15.6",
+    "axios": "^0.21.1",
+    "classnames": "^2.2.6",
+    "dayjs": "^1.10.6",
     "next": "10.1.3",
     "react": "17.0.2",
     "react-code-input": "^3.10.1",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-simple-keyboard": "^3.1.12",
-    "react-verification-code-input": "^1.2.9"
+    "react-verification-code-input": "^1.2.9",
+    "ts-standard": "^9.0.0",
+    "immutability-helper": "^3.1.1",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@types/node": "^15.0.1",
