@@ -19,23 +19,23 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Badge
+  Badge,
+  CircularProgress
 } from '@mui/material'
 
 import { useStyles } from 'assets/jss/layouts/admin'
 
 import ConfirmDialog from 'components/ui-components/Dialogs/ConfirmDialog'
-import Loader from 'components/ui-components/Loader'
 
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { Menu, ChevronLeft, ExitToApp } from '@mui/icons-material';
 
 import Router from 'next/router'
 import { IMenuItem } from 'misc/types'
 import { removeState } from 'misc/localStorage'
 import { menu } from 'misc/constants'
 import { isNil } from 'lodash'
+import { ThemeProvider } from '@mui/styles'
+import theme from 'misc/mui-theme'
 
 interface IProp{
   token: string
@@ -76,14 +76,15 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
   }
   const handleLogout = (): void => {
     removeState('token')
-    location.reload(true)
+    location.reload()
   }
 
   if (loading) {
-    return <Loader />
+    return <CircularProgress />
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position='absolute' className={cn(classes.appBar, { [classes.appBarShift]: open })}>
@@ -95,14 +96,14 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
             onClick={handleDrawerOpen}
             className={cn(classes.menuButton, { [classes.menuButtonHidden]: open })}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
             {appBarTitle}
           </Typography>
           <Tooltip title='Гарах' placement='right' TransitionComponent={Zoom}>
             <IconButton color='inherit' onClick={() => { setConfirmOpen(true) }}>
-              <ExitToAppIcon />
+              <ExitToApp />
             </IconButton>
           </Tooltip>
         </Toolbar>
@@ -116,7 +117,7 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronLeft />
           </IconButton>
         </div>
         <Divider />
@@ -184,6 +185,7 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
         </ConfirmDialog>
       </main>
     </div>
+    </ThemeProvider>
   )
 }
 

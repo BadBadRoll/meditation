@@ -144,6 +144,7 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
         <Alert style={{ minWidth: 300, maxWidth: 500 }} severity={state.notification.color}>
           {state.notification.text}
         </Alert>
+      </Snackbar>
     </AppProvider.Provider>
   )
 }

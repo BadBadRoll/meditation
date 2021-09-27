@@ -1,4 +1,3 @@
-
 export const loadState = (key: string): any => {
     try {
       const serializedState = localStorage.getItem('state_' + key)
