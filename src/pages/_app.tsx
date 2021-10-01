@@ -1,24 +1,20 @@
 import '../styles/globals.css'
 import { FunctionComponent, useReducer, useEffect } from 'react'
 import type { AppProps } from 'next/app'
-import 'antd/dist/antd.css';
-import MuiAlert, { AlertProps, Color as AlertColor } from '@material-ui/lab/Alert'
-import { CircularProgress, Snackbar } from '@mui/material'
+import { Alert, AlertColor, CircularProgress, Snackbar } from '@mui/material'
 import { loadState, removeState, saveState } from 'misc/localStorage';
 import AppProvider from 'misc/providers'
 import update from 'immutability-helper'
 import { IAuthToken, IJwt } from 'misc/types';
 import jwt from 'jsonwebtoken'
 import dayjs from 'dayjs';
+import AuthLayout from 'layouts/auth';
+import AdminLayout from 'layouts/admin';
 
 interface StateType {
   loaded?: boolean
   token?: string | null
   notification?: { text: string, open: boolean, color: AlertColor }
-}
-
-const Alert: FunctionComponent<AlertProps> = (props) => {
-  return <MuiAlert variant='filled' {...props} />
 }
 
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) => {
@@ -27,13 +23,13 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
     {
       loaded: false,
       token: null,
-      notification: { text: '', open: false, color: 'error' }
+      notification: { text: '', open: false, color:'error' }
     }
   )
 
-  const showNotification = (text: string, color: AlertColor): void => {
+  const showNotification = (text: string, color:AlertColor): void => {
     setState({
-      notification: { text, color, open: true }
+      notification: { text, open: true, color }
     })
   }
 
@@ -125,9 +121,8 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
           <Component {...pageProps} />
         </AuthLayout>
         ) : (
-          <AdminLayout>
+          <AdminLayout token={state.token}>
           <Component {...pageProps} />
-
           </AdminLayout>
         )
       }

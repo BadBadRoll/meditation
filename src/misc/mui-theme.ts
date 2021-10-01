@@ -1,4 +1,4 @@
-import { createTheme, adaptV4Theme  } from "@mui/material/styles"
+import { createTheme  } from "@mui/material/styles"
 
   declare module '@mui/system/createTheme/createBreakpoints' {
     interface BreakpointOverrides {
@@ -20,7 +20,7 @@ export const COLORS = {
   }
 }
 
-export const theme = createTheme(adaptV4Theme({
+export const theme = createTheme({
   breakpoints: { // same as tailwind default breakpoint
     values: {
       xs: 0,
@@ -294,6 +294,6 @@ export const theme = createTheme(adaptV4Theme({
       }
     }
   }
-}))
+})
 
 export default theme

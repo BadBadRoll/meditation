@@ -25,7 +25,7 @@ import {
 
 import { useStyles } from 'assets/jss/layouts/admin'
 
-import ConfirmDialog from 'components/ui-components/Dialogs/ConfirmDialog'
+// import ConfirmDialog from 'components/ui-components/Dialogs/ConfirmDialog'
 
 import { Menu, ChevronLeft, ExitToApp } from '@mui/icons-material';
 
@@ -47,7 +47,6 @@ interface StateMenu extends IMenuItem {
 const AdminLayout: FunctionComponent<IProp> = (props) => {
   const classes = useStyles()
   const { token } = props
-  const { countOrder } = useOrderApi()
   const [open, setOpen] = useState(true)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [appBarTitle, setAppBarTitle] = useState('Dashboard')
@@ -125,19 +124,13 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
           <div key={idx}>
             <List>
               {list.map((menuItem: StateMenu, i: number) => {
-                const { icon: ItemIcon, text, route, scopes, badge, badgeContent } = menuItem
+                const { icon: ItemIcon, text, route, scopes } = menuItem
                 if (scopes.length === 0) {
                   return (
                     <Link key={idx.toString() + i.toString()} href={route} passHref>
                       <ListItem component='a' button onClick={() => { setAppBarTitle(formatRoute(route)) }}>
                         <ListItemIcon>
-                          {badge
-                            ? (
-                              <Badge badgeContent={badgeContent} color='primary'>
-                                <ItemIcon />
-                              </Badge>
-                            )
-                            : <ItemIcon />}
+                            <ItemIcon />
                         </ListItemIcon>
                         <ListItemText primary={text} />
                       </ListItem>
@@ -148,13 +141,7 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
                     <Link key={idx.toString() + i.toString()} href={route} passHref>
                       <ListItem component='a' button onClick={() => { setAppBarTitle(formatRoute(route)) }}>
                         <ListItemIcon>
-                          {badge
-                            ? (
-                              <Badge badgeContent={badgeContent} color='primary'>
                                 <ItemIcon />
-                              </Badge>
-                            )
-                            : <ItemIcon />}
                         </ListItemIcon>
                         <ListItemText primary={text} />
                       </ListItem>
@@ -171,18 +158,15 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth={false} className={classes.container}>
           {props.children}
-          <Box pt={3}>
-            {/* <Copyright /> */}
-          </Box>
         </Container>
-        <ConfirmDialog
+        {/* <ConfirmDialog
           open={confirmOpen}
           onClose={() => { setConfirmOpen(false) }}
           onConfirm={handleLogout}
           confirmText='Зөвшөөрөх'
         >
           Та вебсайтаас гарах гэж байна.
-        </ConfirmDialog>
+        </ConfirmDialog> */}
       </main>
     </div>
     </ThemeProvider>

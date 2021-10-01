@@ -1,11 +1,9 @@
 import { Theme } from '@mui/material'
-import createStyles from '@mui/material/styles/createStyles'
-import { makeStyles } from '@mui/material/styles'
-import { OverridesStyleRules } from '@mui/material/styles/overrides'
+import { createStyles, makeStyles } from '@mui/styles'
 
 const drawerWidth = 240
 
-const style = (theme: Theme): OverridesStyleRules => createStyles({
+const style = (theme: Theme) => createStyles({
   root: {
     display: 'flex'
   },

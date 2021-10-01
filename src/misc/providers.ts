@@ -1,6 +1,6 @@
 import React from 'react'
-import { Color as AlertColor } from '@material-ui/lab/Alert'
 import { IJwt } from './types'
+import { AlertColor } from '@mui/material'
 
 interface IAppProvider {
   token: string | null
@@ -11,7 +11,7 @@ interface IAppProvider {
 
 export default React.createContext<IAppProvider>({
   token: null,
-  showNotification: (text, color: AlertColor) => {
+  showNotification: (text: string, color: AlertColor) => {
     console.log('showNotification not implemented', text)
   },
   handleError: (error) => {
