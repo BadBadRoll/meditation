@@ -6,9 +6,10 @@ import update from 'immutability-helper'
 import { VALIDATION_RESULT } from 'misc/validator'
 import AppProvider from 'misc/providers'
 
-import { useEmployeeApi } from 'services/logistic-api/employees'
-import { Avatar, Button, Paper, Typography, TextField, Grid, CircularProgress } from '@mui/material'
+import { Avatar, Button, Paper, Typography, Grid, CircularProgress } from '@mui/material'
 import { LockOutlined } from '@mui/icons-material'
+import router from 'next/router'
+import { TextField } from 'components/ui-components'
 
 interface IState {
   loading?: boolean
@@ -20,7 +21,6 @@ interface IState {
 
 const Login: FunctionComponent = () => {
   const context = useContext(AppProvider)
-  const { login } = useEmployeeApi()
 
   const [state, setState] = useReducer(
     (state: IState, newState: IState) => ({ ...state, ...newState }),
@@ -44,18 +44,6 @@ const Login: FunctionComponent = () => {
     password: state.password
   }
 
-  const loginHandler = async (): Promise<void> => {
-    setState({ loading: true })
-    try {
-      const data = await login(variables)
-      setState({ loading: false })
-      context.handleLogin(data)
-    } catch (err) {
-      setState({ loading: false })
-      context.showNotification(err.message, 'error')
-    }
-  }
-
   const handleChange = (name: string, value: string, result: VALIDATION_RESULT): void => {
     let { validated, validationErr } = state
     if (result === VALIDATION_RESULT.VALID) {
@@ -72,13 +60,7 @@ const Login: FunctionComponent = () => {
   }
 
   const handleLogin = (): void => {
-    if (state.loading) {
-      return
-    }
-    loginHandler().catch(e => {
-      console.error(e)
-      context.showNotification('login failed', 'error')
-    })
+    router.push('/')
   }
 
   return (
