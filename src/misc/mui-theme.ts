@@ -8,8 +8,8 @@ declare module '@material-ui/core/styles/createBreakpoints' {
 
 export const COLORS = {
   primary: {
-    light: '#660099',
-    main: '#660099',
+    light: '#2596be',
+    main: '#2596be',
     dark: '#00001d',
     hover: 'black'
   },

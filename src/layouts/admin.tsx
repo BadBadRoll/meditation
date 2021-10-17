@@ -56,7 +56,7 @@ const AdminLayout: FunctionComponent = ({ children }) => {
 
   const formatRoute = (route: string): string => {
     const title = route.split('/')[1]
-    const capitalized = title !== '' ? title.charAt(0).toUpperCase() + title.slice(1) : 'My tasks'
+    const capitalized = title !== '' ? title.charAt(0).toUpperCase() + title.slice(1) : 'Task Management'
     return (capitalized)
   }
   const handleLogout = (): void => {
@@ -123,9 +123,9 @@ const AdminLayout: FunctionComponent = ({ children }) => {
             </div>
           ))}
         </Drawer>
-        <main className={cn(classes.content, 'bg-gradient-to-r from-purple-400 via-pink-400 to-white')}>
+        <main className={cn(classes.content, 'bg-gradient-to-br from-indigo-400 via-blue-200 to-white')}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth={false} className={cn(classes.container, 'bg-gradient-to-r from-purple-400 via-pink-400 to-white')}>
+          <Container maxWidth={false} className={cn(classes.container)}>
             {children}
           </Container>
           <ConfirmDialog

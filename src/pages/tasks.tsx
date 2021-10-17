@@ -5,23 +5,21 @@ const TaskMaker: FunctionComponent = () => {
   return (
     <div className='flex justify-center items-center flex-1'>
       <div>
-        <form>
-          <h1><strong>File upload</strong></h1>
-          <div className='form-group'>
+        <form className='text-white'>
+          <div className='flex justify-center w-full'>
+          <h1 className='border p-4 w-max rounded-lg '><strong>File upload</strong></h1>
+          </div>
+          <div className='my-4'>
             <label htmlFor='title'>Title </label>
             <TextField type='text' name='title' id='title' className='form-controll' />
           </div>
-          <div className='form-group'>
+          <div className='my-4'>
             <label htmlFor='caption'>Caption</label>
-            <TextField type='text' name='caption' id='caption' className='form-controll' />
+            <TextField type='text' name='caption' id='caption' className='form-controll' multiline />
           </div>
-
-          <div className='form-group file-area'>
-            <label htmlFor='images'>Images</label>
-            <input type='file' name='images' id='images' className='w-96' />
-          </div>
-          <div className='form-group'>
-            <button type='submit'>Upload images</button>
+          <div className='my-4'>
+            <label htmlFor='images' className='w-36 px-4 py-2 rounded-lg cursor-pointer bg-primary'>Images</label>
+            <input type='file' name='images' id='images' className='w-96' hidden />
           </div>
         </form>
       </div>
