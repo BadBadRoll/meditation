@@ -1,35 +1,36 @@
-import { Business, Group, ListAlt, Person } from '@mui/icons-material'
-import { IMenuItem } from './types'
+import { Assignment, Group, ListAlt, NotificationImportant, Person } from '@material-ui/icons'
+import { MenuItem } from 'misc/types'
 
-export const menu: IMenuItem[][] = [
+export const menu: MenuItem[][] = [
   [
     {
-      icon: ListAlt,
-      text: 'Packing lists',
-      route: '/packing-lists',
-      scopes: ['*', 'package']
-    },
+      icon: Assignment,
+      text: 'Task Maker',
+      route: '/tasks'
+    }
   ],
   [
     {
-      icon: Group,
-      text: 'Customers',
-      route: '/customers',
-      scopes: ['*', 'customer']
+      icon: ListAlt,
+      text: 'Task List',
+      route: '/task-list'
     },
     {
-      icon: Business,
-      text: 'Employee',
-      route: '/employee',
-      scopes: ['*', 'employee']
+      icon: Group,
+      text: 'Customers',
+      route: '/customers'
     },
+    {
+      icon: NotificationImportant,
+      text: 'User Feedback',
+      route: '/feedbacks'
+    }
   ],
   [
     {
       icon: Person,
       text: 'My profile',
-      route: '/profile',
-      scopes: []
+      route: '/profile'
     }
   ]
 ]

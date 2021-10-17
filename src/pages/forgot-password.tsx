@@ -9,8 +9,8 @@ import { VALIDATION_RESULT } from 'misc/validator'
 import AppProvider from 'misc/providers'
 
 import ResetPassword from 'components/page-components/ResetPasswordPhone'
-import { Avatar, Button, CircularProgress, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, Typography } from '@mui/material'
-import { LockOutlined } from '@mui/icons-material'
+import { Avatar, Button, CircularProgress, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, Typography } from '@material-ui/core'
+import { LockOutlined } from '@material-ui/icons'
 
 interface IState {
   emailRequested?: boolean
@@ -106,7 +106,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
         return
       }
 
-           console.log('phone Reset')
+      console.log('phone Reset')
     }
   }
   const handleSelect = (event): void => {
@@ -127,16 +127,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
             autoComplete='email'
             value={state.email}
             notEmpty
-            success={state.validated.has('email')}
-            error={state.validationErr.has('email')}
-            onValueChange={handleChange}
-            InputProps={{
-              onKeyPress: (e) => {
-                if (e.key === 'Enter' && !state.emailRequested) {
-                  handleContinue()
-                }
-              }
-            }}
+            onChange={handleChange}
           />
           <Typography variant='subtitle2' color='textSecondary'>
             Та бүртгүүлсэн И-Мэйл хаягаа оруулна уу. Нууц үг сэргээх зааврыг таны И-Мэйл хаяг руу илгээх болно

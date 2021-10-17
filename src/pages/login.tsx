@@ -1,15 +1,13 @@
-import React, { useReducer, useContext, FunctionComponent } from 'react'
+import React, { useReducer, FunctionComponent } from 'react'
 import Link from 'next/link'
 
 import update from 'immutability-helper'
 
 import { VALIDATION_RESULT } from 'misc/validator'
-import AppProvider from 'misc/providers'
-
-import { Avatar, Button, Paper, Typography, Grid, CircularProgress } from '@mui/material'
-import { LockOutlined } from '@mui/icons-material'
 import router from 'next/router'
 import { TextField } from 'components/ui-components'
+import { Avatar, Button, CircularProgress, Grid, Paper, Typography } from '@material-ui/core'
+import { LockOutlined } from '@material-ui/icons'
 
 interface IState {
   loading?: boolean
@@ -20,8 +18,6 @@ interface IState {
 }
 
 const Login: FunctionComponent = () => {
-  const context = useContext(AppProvider)
-
   const [state, setState] = useReducer(
     (state: IState, newState: IState) => ({ ...state, ...newState }),
     {
@@ -32,17 +28,6 @@ const Login: FunctionComponent = () => {
       validationErr: new Set<string>()
     }
   )
-  const isNumeric = (value: string): boolean => {
-    return /^-?\d+$/.test(value)
-  }
-
-  const variables = isNumeric(state.email) ? {
-    phone: state.email,
-    password: state.password
-  } : {
-    email: state.email,
-    password: state.password
-  }
 
   const handleChange = (name: string, value: string, result: VALIDATION_RESULT): void => {
     let { validated, validationErr } = state
@@ -57,10 +42,6 @@ const Login: FunctionComponent = () => {
       validationErr = update(validationErr, { $remove: [name] })
     }
     setState({ [name]: value, validationErr, validated })
-  }
-
-  const handleLogin = (): void => {
-    router.push('/')
   }
 
   return (
@@ -81,8 +62,7 @@ const Login: FunctionComponent = () => {
           autoFocus
           autoComplete='email'
           value={state.email}
-          error={state.validationErr.has('email')}
-          onValueChange={handleChange}
+          onChange={handleChange}
         />
         <TextField
           margin='normal'
@@ -94,26 +74,18 @@ const Login: FunctionComponent = () => {
           id='password'
           autoComplete='current-password'
           value={state.password}
-          error={state.validationErr.has('password')}
           onValueChange={handleChange}
-          InputProps={{
-            onKeyPress: (e) => {
-              if (e.key === 'Enter' && !state.loading) {
-                handleLogin()
-              }
-            }
-          }}
         />
         <Button
           fullWidth
           variant='contained'
           color='primary'
           className='mx-2'
-          onClick={()=> router.push('/')}
+          onClick={async () => await router.push('/')}
           disabled={state.loading}
         >
           Нэвтрэх
-          {state.loading && <CircularProgress />}
+          {state.loading === true && <CircularProgress />}
         </Button>
         <Grid container>
           <Grid item xs>

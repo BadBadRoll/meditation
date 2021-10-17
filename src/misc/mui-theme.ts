@@ -1,15 +1,15 @@
-import { createTheme  } from "@mui/material/styles"
+import { createTheme } from '@material-ui/core/styles'
 
-  declare module '@mui/system/createTheme/createBreakpoints' {
-    interface BreakpointOverrides {
-      '2xl': true
-    }
+declare module '@material-ui/core/styles/createBreakpoints' {
+  interface BreakpointOverrides {
+    '2xl': true
   }
+}
 
 export const COLORS = {
   primary: {
-    light: '#4a426e',
-    main: '#201b43',
+    light: '#660099',
+    main: '#660099',
     dark: '#00001d',
     hover: 'black'
   },
@@ -81,14 +81,32 @@ export const theme = createTheme({
       variant: 'elevation',
       elevation: 0
     }
+
   },
   overrides: {
     MuiTab: {
       root: {
         minWidth: '0 !important'
       },
+      wrapper: {
+        flexDirection: 'row',
+        '& :first-child': {
+          marginBottom: '0 !important'
+        }
+      }
+    },
+    MuiTableCell: {
+      root: {
+        padding: '4px 10px !important'
+      }
     },
     MuiButton: {
+      label: {
+        textTransform: 'none'
+      },
+      root: {
+        borderRadius: '0.5rem'
+      },
       containedPrimary: {
         '&.Mui-disabled': {
           color: 'white !important',
@@ -113,13 +131,6 @@ export const theme = createTheme({
       root: {
         '&:hover': {
           backgroundColor: 'transparent !important'
-        }
-      }
-    },
-    MuiDrawer: {
-      root: {
-        '& .MuiBackdrop-root, .MuiDrawer-paper': {
-          height: '130%'
         }
       }
     },

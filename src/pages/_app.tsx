@@ -1,37 +1,29 @@
 import '../styles/globals.css'
-import { FunctionComponent, useReducer, useEffect } from 'react'
+import { FunctionComponent } from 'react'
 import type { AppProps } from 'next/app'
-import { Alert, AlertColor, CircularProgress, Snackbar } from '@mui/material'
-import { loadState, removeState, saveState } from 'misc/localStorage';
-import AppProvider from 'misc/providers'
-import update from 'immutability-helper'
-import { IAuthToken, IJwt } from 'misc/types';
-import jwt from 'jsonwebtoken'
-import dayjs from 'dayjs';
-import AuthLayout from 'layouts/auth';
-import AdminLayout from 'layouts/admin';
+import AuthLayout from 'layouts/auth'
+import AdminLayout from 'layouts/admin'
 
 interface StateType {
   loaded?: boolean
   token?: string | null
-  notification?: { text: string, open: boolean, color: AlertColor }
 }
 
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) => {
-  const [state, setState] = useReducer(
-    (state: StateType, newState: StateType) => ({ ...state, ...newState }),
-    {
-      loaded: false,
-      token: null,
-      notification: { text: '', open: false, color:'error' }
-    }
-  )
+  // const [state, setState] = useReducer(
+  //   (state: StateType, newState: StateType) => ({ ...state, ...newState }),
+  //   {
+  //     loaded: false,
+  //     token: null,
+  //     notification: { text: '', open: false, color: 'error' }
+  //   }
+  // )
 
-  const showNotification = (text: string, color:AlertColor): void => {
-    setState({
-      notification: { text, open: true, color }
-    })
-  }
+  // const showNotification = (text: string, color: AlertColor): void => {
+  //   setState({
+  //     notification: { text, open: true, color }
+  //   })
+  // }
 
   // const handleLogin = async (res: IJwt): Promise<void> => {
   //   const { token } = res
@@ -108,7 +100,6 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
   //   return <div />
   // }
 
-
   return (
     // <AppProvider.Provider value={{
     //   token: state.token,
@@ -119,11 +110,11 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
       {
         isAuthPath ? (
           <AuthLayout>
-          <Component {...pageProps} />
-        </AuthLayout>
+            <Component {...pageProps} />
+          </AuthLayout>
         ) : (
           <AdminLayout>
-          <Component {...pageProps} />
+            <Component {...pageProps} />
           </AdminLayout>
         )
       }
@@ -141,7 +132,7 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
           {state.notification.text}
         </Alert>
       </Snackbar> */}
-      </>
+    </>
     // </AppProvider.Provider>
   )
 }

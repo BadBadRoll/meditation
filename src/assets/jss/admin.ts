@@ -1,9 +1,11 @@
-import { Theme } from '@mui/material'
-import { createStyles, makeStyles } from '@mui/styles'
+import { Theme } from '@material-ui/core'
+import createStyles from '@material-ui/core/styles/createStyles'
+import { StyleRules } from '@material-ui/styles/withStyles'
+import { makeStyles } from '@material-ui/core/styles'
 
 const drawerWidth = 240
 
-const style = (theme: Theme) => createStyles({
+const style = (theme: Theme): StyleRules => createStyles({
   root: {
     display: 'flex'
   },
@@ -13,8 +15,7 @@ const style = (theme: Theme) => createStyles({
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
+    justifyContent: 'center',
     ...theme.mixins.toolbar
   },
   appBar: {
@@ -68,7 +69,7 @@ const style = (theme: Theme) => createStyles({
     overflow: 'auto'
   },
   container: {
-    paddingTop: theme.spacing(4)
+    paddingTop: theme.spacing(2)
   },
   paper: {
     padding: theme.spacing(2),

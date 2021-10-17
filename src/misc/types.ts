@@ -15,9 +15,9 @@ export interface IAuthToken {
   exp: number
   [key: string]: any
 }
-export interface IMenuItem {
+export interface MenuItem {
   icon: (props: SvgIconProps) => JSX.Element
   text: string
   route: string
-  scopes: string[]
+  badge?: boolean
 }
