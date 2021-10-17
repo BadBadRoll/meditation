@@ -109,7 +109,7 @@ const Login: FunctionComponent = () => {
           variant='contained'
           color='primary'
           className='mx-2'
-          onClick={handleLogin}
+          onClick={()=> router.push('/')}
           disabled={state.loading}
         >
           Нэвтрэх

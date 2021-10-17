@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '../styles/home.module.css'
 
 import { useRouter } from 'next/router'
 
@@ -14,22 +13,19 @@ const Home: FunctionComponent = () => {
     }).catch(e => console.error(e))
   }
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Stora locker</title>
+        <title>Meditation | Admin</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
-      <main className={styles.main} onClick={handlePush}>
-        <h1 className={styles.title}>
+      <main onClick={handlePush}>
+        <h1>
           Welcome to <a>STORABOX!</a>
         </h1>
-
-        <p className={styles.description}>
+        <p>
           Та захиалсан бараагаа авах бол энд дарна уу.
         </p>
-
-        <a className={styles.card}>
+        <a>
           <h3>Ашиглах заавар &rarr;</h3>
           <p>Танилцуулга видео энд байрлана.</p>
         </a>

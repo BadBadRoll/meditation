@@ -37,16 +37,12 @@ import { isNil } from 'lodash'
 import { ThemeProvider } from '@mui/styles'
 import theme from 'misc/mui-theme'
 
-interface IProp{
-  token: string
-}
 interface StateMenu extends IMenuItem {
   badgeContent?: number
 }
 
-const AdminLayout: FunctionComponent<IProp> = (props) => {
+const AdminLayout: FunctionComponent = () => {
   const classes = useStyles()
-  const { token } = props
   const [open, setOpen] = useState(true)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [appBarTitle, setAppBarTitle] = useState('Dashboard')
@@ -60,8 +56,8 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
   }
   // const fixedHeightPaper = cn(classes.paper, classes.fixedHeight)
 
-  const tokenPayload: any = jwt.decode(token)
-  const employeeScopes: string[] = tokenPayload.scopes
+  // const tokenPayload: any = jwt.decode(token)
+  // const employeeScopes: string[] = tokenPayload.scopes
 
   useEffect(() => {
     setAppBarTitle(formatRoute(Router.route))
@@ -73,6 +69,7 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
     const capitalized = title !== '' ? title.charAt(0).toUpperCase() + title.slice(1) : 'My tasks'
     return (capitalized)
   }
+
   const handleLogout = (): void => {
     removeState('token')
     location.reload()
@@ -135,19 +132,19 @@ const AdminLayout: FunctionComponent<IProp> = (props) => {
                         <ListItemText primary={text} />
                       </ListItem>
                     </Link>
-                  )
-                } else if (employeeScopes.some(e => scopes.includes(e))) {
-                  return (
-                    <Link key={idx.toString() + i.toString()} href={route} passHref>
-                      <ListItem component='a' button onClick={() => { setAppBarTitle(formatRoute(route)) }}>
-                        <ListItemIcon>
-                                <ItemIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                      </ListItem>
-                    </Link>
-                  )
-                }
+                  ) }
+              //   } else if (employeeScopes.some(e => scopes.includes(e))) {
+              //     return (
+              //       <Link key={idx.toString() + i.toString()} href={route} passHref>
+              //         <ListItem component='a' button onClick={() => { setAppBarTitle(formatRoute(route)) }}>
+              //           <ListItemIcon>
+              //                   <ItemIcon />
+              //           </ListItemIcon>
+              //           <ListItemText primary={text} />
+              //         </ListItem>
+              //       </Link>
+              //     )
+              //   }
               })}
             </List>
             {idx !== 2 && <Divider />}
