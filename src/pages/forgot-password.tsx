@@ -1,12 +1,7 @@
-import React, { useReducer, useContext, FunctionComponent } from 'react'
+import React, { useReducer, FunctionComponent } from 'react'
 import Link from 'next/link'
 
-import update from 'immutability-helper'
-
 import { TextField } from 'components/ui-components'
-
-import { VALIDATION_RESULT } from 'misc/validator'
-import AppProvider from 'misc/providers'
 
 import ResetPassword from 'components/page-components/ResetPasswordPhone'
 import { Avatar, Button, CircularProgress, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, Typography } from '@material-ui/core'
@@ -24,8 +19,6 @@ interface IState {
 }
 
 const ForgotPasswordPage: FunctionComponent = () => {
-  const context = useContext(AppProvider)
-
   const [state, setState] = useReducer(
     (state: IState, newState: IState) => ({ ...state, ...newState }),
     {
@@ -40,76 +33,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
     }
   )
 
-  const emailReset = async (): Promise<void> => {
-    setState({ emailRequested: true })
-    try {
-      await console.log('emailReset')
-      setState({ isDone: true, emailRequested: false })
-    } catch (err) {
-      setState({ emailRequested: false })
-      context.showNotification(err.message, 'error')
-    }
-  }
-
-  const phoneReset = async (): Promise<void> => {
-    setState({ phoneRequested: true })
-    try {
-      await console.log('phoneReset')
-      setState({ isDone: true, phoneRequested: false })
-    } catch (err) {
-      setState({ phoneRequested: false })
-      context.showNotification(err.message, 'error')
-    }
-  }
-
-  const handleChange = (name: string, value: string, result: VALIDATION_RESULT): void => {
-    if (state.emailRequested) {
-      return
-    }
-    let { validated, validationErr } = state
-    if (result === VALIDATION_RESULT.VALID) {
-      validated = update(validated, { $add: [name] })
-      validationErr = update(validationErr, { $remove: [name] })
-    } else if (result === VALIDATION_RESULT.INVALID) {
-      validated = update(validated, { $remove: [name] })
-      validationErr = update(validationErr, { $add: [name] })
-    } else if (result === VALIDATION_RESULT.EMPTY) {
-      validated = update(validated, { $remove: [name] })
-      validationErr = update(validationErr, { $remove: [name] })
-    }
-    setState({ [name]: value, validationErr, validated })
-  }
-
-  const handleContinue = (): void => {
-    if (state.emailRequested || state.phoneRequested) {
-      return
-    }
-    let { validated, validationErr } = state
-
-    if (state.method === 'email') {
-      if (!validated.has('email')) {
-        validationErr = update(validationErr, { $add: ['email'] })
-      }
-
-      if (validationErr.size > 0) {
-        setState({ validationErr })
-        return
-      }
-      console.log('email Reset')
-    } else {
-      if (!validated.has('phone')) {
-        validationErr = update(validationErr, { $add: ['phone'] })
-      }
-
-      if (validationErr.size > 0) {
-        setState({ validationErr })
-        return
-      }
-
-      console.log('phone Reset')
-    }
-  }
-  const handleSelect = (event): void => {
+  const handleSelect = (event: any): void => {
     setState({ method: event.target.value })
   }
 
@@ -127,7 +51,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
             autoComplete='email'
             value={state.email}
             notEmpty
-            onChange={handleChange}
+            onChange={(e: any) => setState({ email: e.target.value })}
           />
           <Typography variant='subtitle2' color='textSecondary'>
             Та бүртгүүлсэн И-Мэйл хаягаа оруулна уу. Нууц үг сэргээх зааврыг таны И-Мэйл хаяг руу илгээх болно
@@ -136,11 +60,10 @@ const ForgotPasswordPage: FunctionComponent = () => {
             fullWidth
             variant='contained'
             color='primary'
-            onClick={handleContinue}
             disabled={state.emailRequested}
           >
             Үргэлжлүүлэх
-            {state.emailRequested && <CircularProgress />}
+            {state.emailRequested === true && <CircularProgress />}
           </Button>
           <Grid container>
             <Grid item xs>
@@ -164,16 +87,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
             autoComplete='phone'
             value={state.phone}
             notEmpty
-            success={state.validated.has('phone')}
-            error={state.validationErr.has('phone')}
-            onValueChange={handleChange}
-            InputProps={{
-              onKeyPress: (e) => {
-                if (e.key === 'Enter' && !state.phoneRequested) {
-                  handleContinue()
-                }
-              }
-            }}
+            onChange={(e: any) => setState({ phone: e.target.value })}
           />
           <Typography variant='subtitle2' color='textSecondary'>
             Та бүртгүүлсэн утасны дугаараа оруулна уу. Нууц үг сэргээх кодыг таны утсанд мессежээр илгээх болно.
@@ -182,11 +96,10 @@ const ForgotPasswordPage: FunctionComponent = () => {
             fullWidth
             variant='contained'
             color='primary'
-            onClick={handleContinue}
-            disabled={state.phoneRequested}
+            disabled={state.phoneRequested === true}
           >
             Үргэлжлүүлэх
-            {state.phoneRequested && <CircularProgress />}
+            {state.phoneRequested === true && <CircularProgress />}
           </Button>
           <Grid container>
             <Grid item xs>
