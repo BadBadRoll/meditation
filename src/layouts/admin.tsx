@@ -123,9 +123,9 @@ const AdminLayout: FunctionComponent = ({ children }) => {
             </div>
           ))}
         </Drawer>
-        <main className={classes.content}>
+        <main className={cn(classes.content, 'bg-gradient-to-r from-purple-400 via-pink-400 to-white')}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth={false} className={classes.container}>
+          <Container maxWidth={false} className={cn(classes.container, 'bg-gradient-to-r from-purple-400 via-pink-400 to-white')}>
             {children}
           </Container>
           <ConfirmDialog
