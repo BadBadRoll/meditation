@@ -1,4 +1,7 @@
 import dayjs from 'dayjs'
+import * as Yup from 'yup'
+import { PHONE_VERIFY_CODE_REGEX, NAME_REGEX } from '@/misc/constants'
+
 export enum VALIDATION_RESULT {
   VALID,
   INVALID,
@@ -33,6 +36,11 @@ export interface IValidationProps {
   phone?: boolean
   url?: boolean
 }
+
+export const emailValidator = Yup.string().email()
+export const requiredValidator = Yup.string().required()
+export const phoneCodeValidator = Yup.string().matches(PHONE_VERIFY_CODE_REGEX)
+export const nameValidator = Yup.string().matches(NAME_REGEX)
 
 export const validate = (props: IValidationProps, value: any): VALIDATION_RESULT => {
   let ret = VALIDATION_RESULT.VALID

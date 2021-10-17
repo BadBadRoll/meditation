@@ -1,82 +1,65 @@
-import { FunctionComponent } from "react";
-// @material-ui/core components
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
-import router from 'next/router'
-// core components
-import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@material-ui/core";
+import { FunctionComponent, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import { Tab, Tabs } from '@material-ui/core'
 
-const Login:FunctionComponent = () => {
-  return (
-    <div>
-      <div
-        className='min-h-full h-auto relative items-center flex justify-center'
-        style={{
-          backgroundImage: "url('/img/bg7.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
-        }}
-      >
-        <div className='z-2 relative pb-32'>
-          <Grid container className='w-max' justify="center">
-            <Grid item className='relative w-2/3 px-4'>
-              <Card>
-                <form className='py-10'>
-                  <CardHeader color="primary" className='w-full text-center z-10 bg-purple -mt-8 px-4 mb-4' title='Login'>
-                  </CardHeader>
-                  <CardContent>
-                    <TextField
-                      label="Email..."
-                      id="email"
-                      fullWidth
-                      className='my-4'
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className='bg-gray-300' />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <TextField
-                      label="Password"
-                      id="pass"
-                      fullWidth
-                      className='my-4'
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className='bg-gray-300'>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off",
-                      }}
-                    />
-                  </CardContent>
-                  <Divider className='my-4' />
-                  <CardActions className='w-full p-4 gap-4'>
-                    <Button color="primary" fullWidth variant='text'>
-                      Register
-                    </Button>
-                    <Button color="primary" fullWidth onClick={async () => await router.push('/')}>
-                      Login
-                    </Button>
-                  </CardActions>
-                </form>
-              </Card>
-            </Grid>
-          </Grid>
-        </div>
-      </div>
-    </div>
-  );
+import { useToast } from '@/context/toast'
+import { LoginForm, LoginFields } from '@/components/page-components/forms'
+
+enum LoginTab {
+  LOGIN = '/account/login',
+  SIGN_UP = '/account/register'
 }
 
-export default Login
+const LoginPage: FunctionComponent = () => {
+  const router = useRouter()
+  const toast = useToast()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [socialLoggingIn, setSocialLoggingIn] = useState<boolean>(false)
+
+  return (
+    <>
+      <Head>
+        <title>Meditation | Login</title>
+      </Head>
+      <div className='md:my-8 flex flex-col justify-center items-center p-6'>
+        {/* <h1 className='text-2xl my-4 md:my-12'> {translate('auth.login.alreadyRegistered')}</h1> */}
+        <div className='bg-white flex-1 p-6 md:p-10 my-2 md:my-0 flex flex-col items-start relative'>
+          <Tabs
+            value={LoginTab.LOGIN}
+            centered
+            onChange={async (_e, value: LoginTab) => {
+              if (Object.values(LoginTab).includes(value)) {
+                await router.push({
+                  pathname: value
+                })
+              }
+            }}
+            classes={{
+              root: 'w-full'
+            }}
+            variant='fullWidth'
+          >
+            <Tab
+              label={<h2 className='text-xl'>Нэвтрэх</h2>}
+              value={LoginTab.LOGIN}
+            />
+            <Tab
+              label={<h2 className='text-xl'>Бүртгүүлэх</h2>}
+              value={LoginTab.SIGN_UP}
+              classes={{
+                root: 'border-b border-gray-300 border-solid'
+              }}
+            />
+          </Tabs>
+          <LoginForm
+            loading={loading}
+            onLogin={() => console.log('login')}
+          />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default LoginPage
