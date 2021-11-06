@@ -81,3 +81,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+div>.MuiOutlinedInput-root:not(.read-only-input) fieldset{
+  color:white;
+  border:1px solid white !important;
+  border-radius:10px !important
+}

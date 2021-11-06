@@ -122,7 +122,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
         Нууц үгээ мартсан
       </Typography>
       {
-        state.isDone ? <></> : (
+        state.isDone === true ? <></> : (
           <FormControl>
             <RadioGroup value={state.method} onChange={handleSelect}>
               <FormControlLabel value='email' control={<Radio />} label='Э-мэйлээр сэргээх' />
@@ -132,7 +132,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
         )
       }
       {
-        (!state.isDone)
+        (state.isDone !== true)
           ? <Input />
           : (
             state.method === 'email' ? (
@@ -148,7 +148,7 @@ const ForgotPasswordPage: FunctionComponent = () => {
                   </Grid>
                 </Grid>
               </div>
-            ) : <ResetPassword phone={state.phone} />
+            ) : <ResetPassword phone={String(state.phone)} />
           )
       }
     </Paper>

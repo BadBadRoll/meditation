@@ -1,26 +1,21 @@
-import { FunctionComponent } from "react";
-import Icon from "@material-ui/core/Icon";
-import Store from "@material-ui/icons/Store";
-import Warning from "@material-ui/icons/Warning";
-import DateRange from "@material-ui/icons/DateRange";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-import Update from "@material-ui/icons/Update";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
-import Accessibility from "@material-ui/icons/Accessibility";
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
-import { Avatar, Card, CardActions, CardContent, CardHeader, Grid, Table, TableHead, TableCell,TableBody,TableRow, Tab } from "@material-ui/core";
+import { FunctionComponent } from 'react'
+import Icon from '@material-ui/core/Icon'
+import Store from '@material-ui/icons/Store'
+import Warning from '@material-ui/icons/Warning'
+import DateRange from '@material-ui/icons/DateRange'
+import LocalOffer from '@material-ui/icons/LocalOffer'
+import Update from '@material-ui/icons/Update'
+import Accessibility from '@material-ui/icons/Accessibility'
+import { Avatar, Card, CardActions, CardContent, CardHeader, Grid, Table, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core'
 
-const Home:FunctionComponent = () =>  {
+const Home: FunctionComponent = () => {
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="warning" icon>
-              <Avatar color="warning">
+            <CardHeader color='warning' icon>
+              <Avatar color='warning'>
                 <Icon>content_copy</Icon>
               </Avatar>
               <p>Used Space</p>
@@ -29,17 +24,17 @@ const Home:FunctionComponent = () =>  {
               </h3>
             </CardHeader>
             <CardActions>
-                  <Warning />
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Get more space
-                </a>
+              <Warning />
+              <a href='#pablo' onClick={(e) => e.preventDefault()}>
+                Get more space
+              </a>
             </CardActions>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="success" icon>
-              <Avatar color="success">
+            <CardHeader color='success' icon>
+              <Avatar color='success'>
                 <Store />
               </Avatar>
               <p>Revenue</p>
@@ -55,8 +50,8 @@ const Home:FunctionComponent = () =>  {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="danger" icon>
-              <Avatar color="danger">
+            <CardHeader color='danger' icon>
+              <Avatar color='danger'>
                 <Icon>info_outline</Icon>
               </Avatar>
               <p>Fixed Issues</p>
@@ -72,8 +67,8 @@ const Home:FunctionComponent = () =>  {
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info" icon>
-              <Avatar color="info">
+            <CardHeader color='info' icon>
+              <Avatar color='info'>
                 <Accessibility />
               </Avatar>
               <p>Followers</p>
@@ -91,7 +86,7 @@ const Home:FunctionComponent = () =>  {
       <Grid container>
         <Grid item xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="warning">
+            <CardHeader color='warning'>
               <h4 className='text-white mb-2'>Employees</h4>
               <p>
                 New employees on 15th September, 2016
@@ -158,14 +153,13 @@ const Home:FunctionComponent = () =>  {
                     </TableCell>
                   </TableRow>
                 </TableBody>
-                </Table>
+              </Table>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
     </div>
-  );
+  )
 }
 
-export default Home 
-
+export default Home

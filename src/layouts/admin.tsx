@@ -31,6 +31,7 @@ import { removeState } from 'misc/localStorage'
 import { menu } from 'misc/constants'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from '@/misc/mui-theme'
+import { ChevronRight } from '@material-ui/icons'
 
 interface StateMenu extends MenuItem {
   badgeContent?: number
@@ -66,10 +67,10 @@ const AdminLayout: FunctionComponent = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root}>
+      <div className={cn(classes.root, 'bg-gradient-to-br from-indigo-400 via-blue-200 to-white')}>
         <CssBaseline />
-        <AppBar className={cn(classes.appBar, { [classes.appBarShift]: open })}>
-          <Toolbar className={classes.toolbar} classes={{ root: 'bg-primary' }}>
+        <AppBar className={cn(classes.appBar, { [classes.appBarShift]: open }, 'bg-transparent border-0 shadow-xl text-white')}>
+          <Toolbar className={classes.toolbar} classes={{ root: 'bg-transparent' }}>
             <IconButton
               edge='start'
               color='inherit'
@@ -92,14 +93,14 @@ const AdminLayout: FunctionComponent = ({ children }) => {
         <Drawer
           variant='permanent'
           classes={{
-            paper: cn(classes.drawerPaper, { [classes.drawerPaperClose]: !open }, 'bg-primary bg-opacity-60')
+            paper: cn(classes.drawerPaper, { [classes.drawerPaperClose]: !open }, ' border-0 bg-white bg-opacity-20 shadow-xl'),
           }}
           open={open}
           onMouseEnter={handleDrawerOpen}
           onMouseLeave={handleDrawerClose}
         >
-          <div className={classes.toolbarIcon}>
-            <img src='/static/images/logo3.svg' className='h-10 w-auto' />
+          <div className={cn(classes.toolbarIcon, 'justify-end')}>
+            {open && <ChevronRight className='text-white mx-4 text-3xl' />}
           </div>
           <Divider />
           {menu.map((list: StateMenu[], idx: number) => (
@@ -111,7 +112,7 @@ const AdminLayout: FunctionComponent = ({ children }) => {
                     <Link key={idx.toString() + i.toString()} href={route} passHref>
                       <ListItem component='a' button onClick={() => { setAppBarTitle(formatRoute(route)) }} className='gap-2'>
                         <ListItemIcon>
-                          <ItemIcon className='text-white text-3xl' />
+                          <ItemIcon className='text-white text-3xl ml-2' />
                         </ListItemIcon>
                         <ListItemText primary={text} classes={{ root: 'text-white' }} />
                       </ListItem>

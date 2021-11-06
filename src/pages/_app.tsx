@@ -3,6 +3,10 @@ import { FunctionComponent } from 'react'
 import type { AppProps } from 'next/app'
 import AuthLayout from 'layouts/auth'
 import AdminLayout from 'layouts/admin'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 interface StateType {
   loaded?: boolean

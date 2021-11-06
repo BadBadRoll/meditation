@@ -1,10 +1,10 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Tab, Tabs } from '@material-ui/core'
 
 import { useToast } from '@/context/toast'
-import { LoginForm, LoginFields } from '@/components/page-components/forms'
+import { LoginForm } from '@/components/page-components/forms'
 
 enum LoginTab {
   LOGIN = '/account/login',
@@ -15,7 +15,6 @@ const LoginPage: FunctionComponent = () => {
   const router = useRouter()
   const toast = useToast()
   const [loading, setLoading] = useState<boolean>(false)
-  const [socialLoggingIn, setSocialLoggingIn] = useState<boolean>(false)
 
   return (
     <>

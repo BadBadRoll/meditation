@@ -36,7 +36,7 @@ module.exports = {
         // },
         primary: {
           light: '#373576',
-          DEFAULT: '#2596be',
+          DEFAULT: '#818cf8',
           dark: '#00001d',
           hover: '#1d06bd'
         },
