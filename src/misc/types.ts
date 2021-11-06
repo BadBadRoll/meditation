@@ -7,7 +7,7 @@ export interface MenuItem {
   badge?: boolean
 }
 
-export interface ProjectList {
+export interface Project {
   catId: string
   desc: string
   sections: ProjectSection[]

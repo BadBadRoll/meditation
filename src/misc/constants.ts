@@ -1,19 +1,17 @@
-import { Assignment, Group, ListAlt, NotificationImportant, Person } from '@material-ui/icons'
+import { Assignment, Group, ListAlt, Person } from '@material-ui/icons'
 import { MenuItem } from 'misc/types'
 
 export const menu: MenuItem[][] = [
   [
     {
       icon: Assignment,
-      text: 'Task Maker',
-      route: '/tasks'
-    }
-  ],
-  [
+      text: 'Categories',
+      route: '/categories'
+    },
     {
       icon: ListAlt,
-      text: 'Task List',
-      route: '/task-list'
+      text: 'Projects',
+      route: '/projects'
     },
     {
       icon: Group,
@@ -21,16 +19,9 @@ export const menu: MenuItem[][] = [
       route: '/customers'
     },
     {
-      icon: NotificationImportant,
-      text: 'User Feedback',
-      route: '/feedbacks'
-    }
-  ],
-  [
-    {
       icon: Person,
-      text: 'My profile',
-      route: '/profile'
+      text: 'Roles',
+      route: '/roles'
     }
   ]
 ]
