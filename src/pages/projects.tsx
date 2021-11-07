@@ -1,6 +1,6 @@
 import { Category, Project, ProjectSection } from '@/misc/types'
 import instance from '@/service/axios/axiosConfig'
-import { Button, Chip, CircularProgress, Divider, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core'
+import { Button, Chip, CircularProgress, Divider, Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core'
 import { ChevronRight, Edit } from '@material-ui/icons'
 import { AxiosResponse } from 'axios'
 import { FunctionComponent, useEffect, useReducer } from 'react'
@@ -159,7 +159,7 @@ const TaskMaker: FunctionComponent = () => {
           <CircularProgress />
         )}
       </div>
-      <Modal open={state.editSection ?? false}>
+      <Dialog open={state.editSection ?? false} onClose={() => setState({ editSection: false })} classes={{ paper: 'bg-opacity-40 bg-white p-8' }}>
         <form className='text-white'>
           <div className='flex justify-center w-full'>
             <span className='text-lg font-semibold'>Add Section</span>
@@ -181,7 +181,7 @@ const TaskMaker: FunctionComponent = () => {
             Upload
           </Button>
         </form>
-      </Modal>
+      </Dialog>
     </div>
   )
 }

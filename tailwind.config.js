@@ -11,7 +11,7 @@ module.exports = {
       '1/2': '50vh',
       '3/4': '75vh',
       '4/5': '80vh',
-      full: '100vh'
+      screen: '100vh'
     },
     extend: {
       spacing: {

@@ -6,8 +6,8 @@ import { useToast } from '@/context/toast'
 import { RegisterForm } from '@/components/page-components/forms'
 
 enum LoginTab {
-  LOGIN = '/account/login',
-  SIGN_UP = '/account/register'
+  LOGIN = '/login',
+  SIGN_UP = '/register'
 }
 
 const RegisterPage: FunctionComponent = () => {
@@ -16,9 +16,9 @@ const RegisterPage: FunctionComponent = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   return (
-    <div className='md:my-8 w-full flex flex-col justify-center items-center p-6'>
-      <div className='bg-white'>
-        <div className='w-full p-6 md:p-10 my-2 md:my-0 flex flex-col items-start relative'>
+    <div className='md:my-8 w-full flex flex-col justify-center items-center p-6 min-w-max'>
+      <div>
+        <div className='bg-white bg-opacity-30 rounded-2xl w-full p-6 md:p-10 my-2 md:my-0 flex flex-col items-start relative'>
           <Tabs
             value={LoginTab.SIGN_UP}
             centered

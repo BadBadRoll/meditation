@@ -31,11 +31,11 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
         errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаараа оруулна уу'
       } else if (values.identifier.includes('@')) { // email
         if (!emailValidator.isValidSync(values.identifier)) {
-          errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна',
+          errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна'
         }
       } else { // phone
         if (!PHONE_REGEX.test(values.identifier)) {
-          errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна',
+          errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна'
         }
       }
       return errors

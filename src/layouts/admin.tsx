@@ -93,14 +93,12 @@ const AdminLayout: FunctionComponent = ({ children }) => {
         <Drawer
           variant='permanent'
           classes={{
-            paper: cn(classes.drawerPaper, { [classes.drawerPaperClose]: !open }, ' border-0 bg-white bg-opacity-20 shadow-xl'),
+            paper: cn(classes.drawerPaper, { [classes.drawerPaperClose]: !open }, ' border-0 bg-white bg-opacity-20 shadow-xl')
           }}
           open={open}
-          onMouseEnter={handleDrawerOpen}
-          onMouseLeave={handleDrawerClose}
         >
           <div className={cn(classes.toolbarIcon, 'justify-end')}>
-            {open && <ChevronRight className='text-white mx-4 text-3xl' />}
+            {open && <ChevronRight className='text-white mx-4 text-3xl cursor-pointer' onClick={handleDrawerClose} />}
           </div>
           <Divider />
           {menu.map((list: StateMenu[], idx: number) => (

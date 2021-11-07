@@ -85,7 +85,7 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
   //   )
   // }
 
-  const isAuthPath = router.pathname === '/login' || router.pathname === '/set-password' || router.pathname === '/forgot-password' || router.pathname === '/confirm-email'
+  const isAuthPath = router.pathname === '/login' || router.pathname === '/set-password' || router.pathname === '/forgot-password' || router.pathname === '/confirm-email' || router.pathname === '/register'
 
   // if ((state.token === undefined || state.token === null) && !isAuthPath) {
   //   saveState('redirectPath', router.asPath)

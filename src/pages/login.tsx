@@ -7,8 +7,8 @@ import { useToast } from '@/context/toast'
 import { LoginForm } from '@/components/page-components/forms'
 
 enum LoginTab {
-  LOGIN = '/account/login',
-  SIGN_UP = '/account/register'
+  LOGIN = '/login',
+  SIGN_UP = '/register'
 }
 
 const LoginPage: FunctionComponent = () => {
@@ -21,9 +21,9 @@ const LoginPage: FunctionComponent = () => {
       <Head>
         <title>Meditation | Login</title>
       </Head>
-      <div className='md:my-8 flex flex-col justify-center items-center p-6'>
+      <div className='md:my-8 flex flex-col justify-center items-center p-6 min-w-max'>
         {/* <h1 className='text-2xl my-4 md:my-12'> {translate('auth.login.alreadyRegistered')}</h1> */}
-        <div className='bg-white flex-1 p-6 md:p-10 my-2 md:my-0 flex flex-col items-start relative'>
+        <div className='bg-white bg-opacity-30 flex-1 p-6 md:p-10 my-2 md:my-0 flex flex-col items-start relative rounded-2xl'>
           <Tabs
             value={LoginTab.LOGIN}
             centered
