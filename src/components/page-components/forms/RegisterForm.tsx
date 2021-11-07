@@ -63,6 +63,7 @@ const RegisterForm: FunctionComponent<Props> = ({ className, loading, onRegister
 
   return (
     <form className={cn(className, 'w-full')} onSubmit={formik.handleSubmit}>
+      <span className='flex justify-center text-2xl'>Бүртгүүлэх</span>
       <div className='w-full flex flex-col items-center my-4'>
         <div className='md:w-2/3 my-4 px-4 md:px-0 w-full mb-6'>
           <label>Та И-Мэйл хаяг эсвэл Утасны дугаараа оруулна уу :</label>
@@ -135,7 +136,7 @@ const RegisterForm: FunctionComponent<Props> = ({ className, loading, onRegister
           </div>
         </div>
         <div className='w-2/3 flex justify-center h-10'>
-          <Button disabled={loading} type='submit' className='w-full'>
+          <Button disabled={loading} type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
             Бүртгүүлэх
             {loading && <CircularProgress color='inherit' size='0.875rem' className='ml-1' />}
           </Button>

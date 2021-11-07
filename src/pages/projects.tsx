@@ -77,8 +77,8 @@ const TaskMaker: FunctionComponent = () => {
     <div className='flex items-center flex-1 p-6'>
       <div>
         {state.category !== undefined ? (
-          <div className='flex gap-4'>
-            <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-max h-full' }}>
+          <div className='gap-4 grid grid-cols-3'>
+            <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-full h-full' }}>
               {state.category.map((item, idx) => (
                 <div key={item._id}>
                   <div

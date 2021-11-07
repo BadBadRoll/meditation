@@ -49,6 +49,7 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
 
   return (
     <form className={cn(className, 'w-full')} onSubmit={formik.handleSubmit}>
+      <span className='flex justify-center text-2xl'>Нэвтрэх</span>
       <div className='w-full flex flex-col items-center my-4'>
         <div className='md:w-2/3 my-4 px-4 md:px-0'>
           <label>Та И-Мэйл хаяг эсвэл Утасны дугаараа оруулна уу :</label>
@@ -80,14 +81,14 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
           />
         </div>
         <div className='md:w-2/3 flex justify-end'>
-          <Link href='/account/forgot-password'>
+          <Link href='/forgot-password'>
             <Button variant='text'>
               Нууц үгээ мартсан уу?
             </Button>
           </Link>
         </div>
         <div className='w-2/3 flex justify-center h-10 my-6'>
-          <Button disabled={loading} type='submit' className='w-full'>
+          <Button disabled={loading} type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
             Нэвтрэх
             {loading && <CircularProgress color='inherit' size='0.875rem' className='ml-1' />}
           </Button>
