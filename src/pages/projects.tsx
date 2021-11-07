@@ -1,6 +1,6 @@
 import { Category, Project, ProjectSection } from '@/misc/types'
 import instance from '@/service/axios/axiosConfig'
-import { Button, Chip, CircularProgress, Divider, Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core'
+import { Button, Chip, CircularProgress, Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core'
 import { ChevronRight, Edit } from '@material-ui/icons'
 import { AxiosResponse } from 'axios'
 import { FunctionComponent, useEffect, useReducer } from 'react'
@@ -78,21 +78,26 @@ const TaskMaker: FunctionComponent = () => {
       <div>
         {state.category !== undefined ? (
           <div className='gap-4 grid grid-cols-3'>
-            <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-full h-full' }}>
-              {state.category.map((item, idx) => (
-                <div key={item._id}>
-                  <div
-                    className='text-white text-lg hover:bg-white hover:text-black hover:bg-opacity-30 flex justify-between items-center cursor-pointer'
-                  >
-                    <span>{item.name}</span>
-                    <ChevronRight className='mx-2 text-3xl' />
-                  </div>
-                  <Divider className='bg-white' />
-                </div>
-              ))}
+            <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-full' }} style={{ height: 'max-content' }}>
+              <TableContainer className='my-4'>
+                <Table size='small'>
+                  <TableBody>
+                    {state.category.map((item, idx) => (
+                      <TableRow key={item._id}>
+                        <TableCell
+                          className='text-white text-lg hover:bg-white hover:text-black hover:bg-opacity-30 flex justify-between items-center cursor-pointer'
+                        >
+                          <span>{item.name}</span>
+                          <ChevronRight className='mx-2 text-3xl' />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Paper>
             {state.list !== undefined && (
-              <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-auto h-full' }}>
+              <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-auto' }} style={{ height: 'max-content' }}>
                 <TableContainer className='my-4'>
                   <Table size='small'>
                     <TableHead>
@@ -118,7 +123,7 @@ const TaskMaker: FunctionComponent = () => {
               </Paper>
             )}
             {state.sections !== undefined && (
-              <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-max h-full max-h-96 overflow-y-auto' }}>
+              <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-max h-full overflow-y-auto' }}>
                 {state.sections.length !== 0 ? (
                   <TableContainer className='my-4'>
                     <div className='flex justify-between items-center text-white mb-4'>

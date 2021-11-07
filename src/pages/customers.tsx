@@ -1,16 +1,6 @@
-import React, { useReducer, useContext, FunctionComponent, useEffect } from 'react'
-import AppProvider from 'misc/providers'
+import React, { useReducer, FunctionComponent } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
-
-import { ICustomer, IGetBapiList, ICustomerStatus } from 'misc/types'
-import { useCustomerApi } from 'services/admin-api/customers'
-
-import { VALIDATION_RESULT } from 'misc/validator'
-import update from 'immutability-helper'
-
-import styles from 'assets/css/pages/customers.module.css'
-import { useStyles } from 'assets/jss/pages/globals'
 
 import SearchIcon from '@material-ui/icons/Search'
 
@@ -37,7 +27,6 @@ const DEFAULT_FILTER = 'nofilter'
 interface IState {
   loading?: boolean
   cleared?: number
-  data?: IGetBapiList<ICustomer>
   search?: string
   page?: number
   pageSize?: number
@@ -46,10 +35,6 @@ interface IState {
   validationErr?: Set<String>
 }
 const Customers: FunctionComponent = () => {
-  const classes = useStyles()
-  const context = useContext(AppProvider)
-  const { getCustomers } = useCustomerApi()
-
   const [state, setState] = useReducer(
     (state: IState, newState: IState) => ({ ...state, ...newState }),
     {
@@ -62,9 +47,6 @@ const Customers: FunctionComponent = () => {
       validationErr: new Set<String>()
     }
   )
-  useEffect(() => { fetchCustomers().catch(e => context.showNotification('fetch customers failed', 'error')) }, [state.page])
-  useEffect(() => { fetchCustomers().catch(e => context.showNotification('fetch customers failed', 'error')) }, [state.pageSize])
-  useEffect(() => { fetchCustomers().catch(e => context.showNotification('fetch customers failed', 'error')) }, [state.cleared])
 
   const fetchCustomers = async (): Promise<void> => {
     setState({ loading: true })
@@ -126,7 +108,7 @@ const Customers: FunctionComponent = () => {
               fullWidth
               name='search'
               value={state.search ?? ''}
-              onChange={(e) => setState({search: e.target.value})}
+              onChange={(e) => setState({ search: e.target.value })}
               InputProps={{
                 onKeyPress: (e) => {
                   if (e.key === 'Enter' && !state.loading) {
@@ -140,7 +122,7 @@ const Customers: FunctionComponent = () => {
               fullWidth
               label={<p>Төлөв</p>}
               value={state.status}
-               onChange={(e) => setState({status: e.target.value})}
+              onChange={(e) => setState({ status: e.target.value })}
             >
               <MenuItem value={DEFAULT_FILTER}>Бүгд</MenuItem>
               <MenuItem value={ICustomerStatus.active}>Идэвхтэй</MenuItem>
