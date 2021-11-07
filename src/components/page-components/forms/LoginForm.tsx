@@ -50,48 +50,40 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
   return (
     <form className={cn(className, 'w-full')} onSubmit={formik.handleSubmit}>
       <span className='flex justify-center text-2xl'>Нэвтрэх</span>
-      <div className='w-full flex flex-col items-center my-4'>
-        <div className='md:w-2/3 my-4 px-4 md:px-0'>
-          <label>Та И-Мэйл хаяг эсвэл Утасны дугаараа оруулна уу :</label>
-          <TextField
-            fullWidth
-            id='identifier'
-            name='identifier'
-            placeholder='И-Мэйл хаяг эсвэл Утасны дугаар'
-            value={formik.values.identifier}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.identifier === true && formik.errors.identifier !== undefined}
-            helperText={formik.touched.identifier === true ? formik.errors.identifier : undefined}
-          />
-        </div>
-        <div className='md:w-2/3 my-4 w-full px-4 md:px-0'>
-          <label>Нууц үг :</label>
-          <TextField
-            fullWidth
-            id='password'
-            name='password'
-            type='password'
-            placeholder='Нууц үг'
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password === true && formik.errors.password !== undefined}
-            helperText={formik.touched.password === true ? formik.errors.password : undefined}
-          />
-        </div>
-        <div className='md:w-2/3 flex justify-end'>
-          <Link href='/forgot-password'>
+      <div className='flex flex-col items-center my-4 gap-8 w-96 px-6'>
+        <TextField
+          fullWidth
+          id='identifier'
+          name='identifier'
+          label='И-Мэйл хаяг эсвэл Утасны дугаар'
+          value={formik.values.identifier}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.identifier === true && formik.errors.identifier !== undefined}
+          helperText={formik.touched.identifier === true ? formik.errors.identifier : undefined}
+        />
+        <TextField
+          fullWidth
+          id='password'
+          name='password'
+          type='password'
+          label='Нууц үг'
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.password === true && formik.errors.password !== undefined}
+          helperText={formik.touched.password === true ? formik.errors.password : undefined}
+        />
+        <Button disabled={loading} type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
+          Нэвтрэх
+          {loading && <CircularProgress color='inherit' size='0.875rem' className='ml-1' />}
+        </Button>
+        <div className='justify-end flex w-full'>
+          <Link href='/register'>
             <Button variant='text'>
-              Нууц үгээ мартсан уу?
+              Бүртгүүлэх үү?
             </Button>
           </Link>
-        </div>
-        <div className='w-2/3 flex justify-center h-10 my-6'>
-          <Button disabled={loading} type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
-            Нэвтрэх
-            {loading && <CircularProgress color='inherit' size='0.875rem' className='ml-1' />}
-          </Button>
         </div>
       </div>
     </form>
