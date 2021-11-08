@@ -51,7 +51,7 @@ const Categories: FunctionComponent = () => {
     <div className='flex items-center w-full'>
       {state.loading !== true && state.category !== undefined ? (
         <div>
-          <Paper classes={{ root: 'w-full' }}>
+          <Paper>
             <TableContainer>
               <TableHead>
                 <TableCell>Нэр</TableCell>
@@ -61,7 +61,7 @@ const Categories: FunctionComponent = () => {
                 {state.category.map(category => (
                   <TableRow key={category._id}>
                     <TableCell>{category.name}</TableCell>
-                    <TableCell>{category.desc}</TableCell>
+                    <TableCell className='min-w-50'>{category.desc}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -70,7 +70,7 @@ const Categories: FunctionComponent = () => {
           <Fab onClick={() => setState({ open: true })} className='absolute bottom-10 right-10 rounded-full'><Add /></Fab>
           <Dialog open={state.open === true} onClose={handleClose}>
             <DialogTitle>Категори Нэмэх</DialogTitle>
-            <DialogContent classes={{ root: 'gap-4' }}>
+            <DialogContent classes={{ root: 'gap-4 flex flex-col min-w-50' }}>
               <TextField
                 label='Нэр'
                 onChange={(e) => setState({ fieldName: e.target.value })}
@@ -78,6 +78,8 @@ const Categories: FunctionComponent = () => {
               <TextField
                 label='Тайлбар'
                 onChange={(e) => setState({ fieldDesc: e.target.value })}
+                multiline
+                rows={4}
               />
             </DialogContent>
             <DialogActions>

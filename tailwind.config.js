@@ -13,6 +13,17 @@ module.exports = {
       '4/5': '80vh',
       screen: '100vh'
     },
+    minWidth: {
+     0: '0px',
+'full': '100%',
+	'min': 'min-content',
+'max': 'max-content',
+'10': '100px',
+'20': '200px',
+'30': '300px',
+'40': '400px',
+'50': '500px'
+    },
     extend: {
       spacing: {
         18: '4.5rem',

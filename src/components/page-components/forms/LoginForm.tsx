@@ -9,7 +9,7 @@ import { PHONE_REGEX } from '@/misc/constants'
 import { emailValidator, requiredValidator } from '@/misc/validator'
 
 export interface LoginFields {
-  identifier: string
+  email: string
   password: string
 }
 
@@ -22,20 +22,20 @@ interface Props {
 const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) => {
   const formik = useFormik<LoginFields>({
     initialValues: {
-      identifier: '',
+      email: '',
       password: ''
     },
     validate: (values) => {
       const errors: Partial<LoginFields> = {}
-      if (!requiredValidator.isValidSync(values.identifier)) {
-        errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаараа оруулна уу'
-      } else if (values.identifier.includes('@')) { // email
-        if (!emailValidator.isValidSync(values.identifier)) {
-          errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна'
+      if (!requiredValidator.isValidSync(values.email)) {
+        errors.email = 'И-Мэйл хаяг эсвэл Утасны дугаараа оруулна уу'
+      } else if (values.email.includes('@')) { // email
+        if (!emailValidator.isValidSync(values.email)) {
+          errors.email = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна'
         }
       } else { // phone
-        if (!PHONE_REGEX.test(values.identifier)) {
-          errors.identifier = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна'
+        if (!PHONE_REGEX.test(values.email)) {
+          errors.email = 'И-Мэйл хаяг эсвэл Утасны дугаарын формат буруу байна'
         }
       }
       return errors
@@ -53,14 +53,14 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
       <div className='flex flex-col items-center my-4 gap-8 w-96 px-6'>
         <TextField
           fullWidth
-          id='identifier'
-          name='identifier'
+          id='email'
+          name='email'
           label='И-Мэйл хаяг эсвэл Утасны дугаар'
-          value={formik.values.identifier}
+          value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.identifier === true && formik.errors.identifier !== undefined}
-          helperText={formik.touched.identifier === true ? formik.errors.identifier : undefined}
+          error={formik.touched.email === true && formik.errors.email !== undefined}
+          helperText={formik.touched.email === true ? formik.errors.email : undefined}
         />
         <TextField
           fullWidth

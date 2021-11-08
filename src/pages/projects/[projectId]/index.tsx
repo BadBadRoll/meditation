@@ -30,7 +30,7 @@ const ProjectInfo: FunctionComponent = () => {
 
   useEffect(() => {
     fetchSections().catch(e => console.error(e))
-  }, [router.query.projectId])
+  }, [])
 
   const fetchSections = async (): Promise<void> => {
     if (router.query.projectId !== undefined) {

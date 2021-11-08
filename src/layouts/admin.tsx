@@ -27,7 +27,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { useStyles } from 'assets/jss/admin'
 import Router from 'next/router'
 import { MenuItem } from 'misc/types'
-import { removeState } from 'misc/localStorage'
 import { menu } from 'misc/constants'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from '@/misc/mui-theme'
@@ -61,7 +60,7 @@ const AdminLayout: FunctionComponent = ({ children }) => {
     return (capitalized)
   }
   const handleLogout = (): void => {
-    removeState('token')
+    localStorage.removeItem('_token')
     location.reload()
   }
 
