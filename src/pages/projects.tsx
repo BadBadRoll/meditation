@@ -161,7 +161,7 @@ const TaskMaker: FunctionComponent = () => {
 
           </div>
         ) : (
-          <CircularProgress className='text-3xl' />
+          <CircularProgress className='absolute top-1/2 left-1/2 h-20 w-20' />
         )}
       </div>
       <Dialog open={state.editSection ?? false} onClose={() => setState({ editSection: false })} classes={{ paper: 'bg-opacity-40 bg-white p-8' }}>
