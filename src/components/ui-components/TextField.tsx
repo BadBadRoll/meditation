@@ -5,7 +5,7 @@ import { validate, VALIDATION_RESULT, IValidationProps } from 'misc/validator'
 import {
   TextField,
   TextFieldProps
-} from '@mui/material'
+} from '@material-ui/core'
 
 type ITextFieldProps = TextFieldProps & {
   allowEmpty?: boolean
@@ -33,7 +33,7 @@ type ITextFieldProps = TextFieldProps & {
 
 const ValidTextField: FunctionComponent<ITextFieldProps> = ({ onValueChange, success, allowEmpty, notEmpty, maxLength, minLength, length, regex, phone, phoneInternational, email, url, number, numeric, maxValue, minValue, inValue, equalTo, notEqualTo, money, ...props }) => {
   const validationProps: IValidationProps = { allowEmpty, notEmpty, maxLength, minLength, length, regex, phone, phoneInternational, email, url, number, numeric, maxValue, minValue, inValue, equalTo, notEqualTo, money }
-  function onChange (event: React.ChangeEvent<HTMLInputElement>): void {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target
     const result = validate(validationProps, value)
     if (result !== VALIDATION_RESULT.UNACCEPTED) {

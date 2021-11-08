@@ -16,9 +16,10 @@ export interface Project {
 }
 
 export interface ProjectSection {
-  audioPath: string
+  audioPath?: string
   name: string
   projectId: string
+  desc?: string
   _id: string
   tags?: ProjectTagList[]
 }
@@ -33,4 +34,5 @@ export interface ProjectTagList {
 export interface Category {
   _id: string
   name: string
+  desc: string
 }
