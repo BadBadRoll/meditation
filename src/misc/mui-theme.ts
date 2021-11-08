@@ -6,20 +6,6 @@ declare module '@material-ui/core/styles/createBreakpoints' {
   }
 }
 
-export const COLORS = {
-  primary: {
-    light: '#2596be',
-    main: '#818cf8',
-    dark: '#00001d',
-    hover: 'black'
-  },
-  secondary: {
-    light: '#fff655',
-    main: '#fff',
-    dark: '#c59400'
-  }
-}
-
 export const theme = createTheme({
   breakpoints: { // same as tailwind default breakpoint
     values: {
@@ -33,10 +19,6 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: '\'Open Sans\', sans-serif'
-  },
-  palette: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary
   },
   props: {
     MuiPaper: {
@@ -177,23 +159,6 @@ export const theme = createTheme({
       root: {
         minWidth: 0,
         marginRight: '1rem'
-      }
-    },
-    MuiListItem: {
-      root: {
-        cursor: 'pointer',
-        '&:hover': {
-          color: COLORS.primary.hover
-        },
-        '&:hover .MuiListItemIcon-root svg': {
-          color: COLORS.primary.hover
-        }
-      },
-      container: {
-        cursor: 'pointer',
-        '&:hover': {
-          color: COLORS.primary.hover
-        }
       }
     },
     MuiAccordion: {
