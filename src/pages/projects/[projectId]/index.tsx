@@ -42,11 +42,23 @@ const ProjectInfo: FunctionComponent = () => {
     }
   }
 
-  const handleUploadAudio = async (audio: File): Promise<void> => {
-    if (state.sectionEdit !== undefined && state.sections !== undefined && audio !== null) {
-      const sectionId = state.sections[state.sectionEdit]._id
-      setState({ audio: audio })
-      await instance.post(`/sections/upload?${sectionId}`, audio, { headers: { 'Content-type': 'audio/mpeg' } })
+  const handleUploadAudio = async (e: any, i: number): Promise<void> => {
+
+    if (e.target.files !== undefined && state.sections !== undefined) {
+      const audio: File = e.target.files[0]
+      console.log(audio)
+      const sectionId = state.sections[i]._id
+      const url = `/sections/upload?sectionId=${sectionId}`
+      console.log(url)
+      const bodyFormData = new FormData();
+      bodyFormData.append('test', audio)
+      console.log(bodyFormData)
+      await instance.post(url, bodyFormData, {
+        headers: {
+          'Content-type': 'multipart/form-data', "Accept": "application/json",
+          "type": "formData"
+        }
+      })
     }
   }
   return (
@@ -80,7 +92,7 @@ const ProjectInfo: FunctionComponent = () => {
                         <Edit className='cursor-pointer ' onClick={() => setState({ sectionEdit: i })} />
                         <div>
                           <label htmlFor='audio'><Unarchive className='cursor-pointer' /></label>
-                          <input type='file' name='images' id='audio' className='w-96' hidden onChange={async (e) => e.target.files !== null && (await handleUploadAudio(e.target.files[0]))} />
+                          <input type='file' name='images' id='audio' className='w-96' hidden onChange={(e) => handleUploadAudio(e, i)} />
                         </div>
                         <LocalOffer className='cursor-pointer' onClick={() => setState({ tagModalOpen: true })} />
                       </div>
