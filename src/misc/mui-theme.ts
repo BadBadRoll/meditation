@@ -89,20 +89,6 @@ export const theme = createTheme({
       root: {
         borderRadius: '0.5rem'
       },
-      containedPrimary: {
-        '&.Mui-disabled': {
-          color: 'white !important',
-          backgroundColor: '#4a426e !important',
-          opacity: '0.5'
-        }
-      },
-      containedSecondary: {
-        '&.Mui-disabled': {
-          color: 'white !important',
-          backgroundColor: '#fdc414 !important',
-          opacity: '0.5'
-        }
-      },
       text: {
         '&:hover': {
           backgroundColor: 'transparent !important'

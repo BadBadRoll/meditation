@@ -11,18 +11,20 @@ module.exports = {
       '1/2': '50vh',
       '3/4': '75vh',
       '4/5': '80vh',
-      screen: '100vh'
+      screen: '100vh',
+      10: '10rem',
+      20: '20rem'
     },
     minWidth: {
-     0: '0px',
-'full': '100%',
-	'min': 'min-content',
-'max': 'max-content',
-'10': '100px',
-'20': '200px',
-'30': '300px',
-'40': '400px',
-'50': '500px'
+      0: '0px',
+      full: '100%',
+      min: 'min-content',
+      max: 'max-content',
+      10: '100px',
+      20: '200px',
+      30: '300px',
+      40: '400px',
+      50: '500px'
     },
     extend: {
       spacing: {
@@ -47,7 +49,7 @@ module.exports = {
         // },
         primary: {
           light: '#373576',
-          DEFAULT: '#818cf8',
+          DEFAULT: '#000000',
           dark: '#00001d',
           hover: '#1d06bd'
         },

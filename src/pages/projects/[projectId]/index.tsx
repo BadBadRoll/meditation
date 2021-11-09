@@ -1,7 +1,7 @@
 import { Project, ProjectSection } from '@/misc/types'
 import instance from '@/service/axios/axiosConfig'
 import { Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
-import { Edit, LocalOffer, Unarchive } from '@material-ui/icons'
+import { ChevronLeft, Edit, Launch, Unarchive } from '@material-ui/icons'
 import { AxiosResponse } from 'axios'
 import { FunctionComponent, useEffect, useReducer } from 'react'
 import router from 'next/router'
@@ -17,6 +17,7 @@ interface State {
   audio?: File
   sectionLoading?: boolean
   tagModalOpen?: boolean
+  tagSection?: ProjectSection
 }
 
 const ProjectInfo: FunctionComponent = () => {
@@ -59,17 +60,21 @@ const ProjectInfo: FunctionComponent = () => {
           "type": "formData"
         }
       })
+      fetchSections()
     }
   }
   return (
     <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-full h-full overflow-y-auto' }}>
       {state.sectionLoading !== false ? (
-        <CircularProgress size={50} />
+        <div className='flex w-full min-h-20 items-center justify-center'>
+          <CircularProgress size={100} />
+        </div>
       ) : (
         state.sections !== undefined && state.sections.length !== 0 ? (
           <TableContainer className='my-4'>
-            <div className='flex justify-end items-center  mb-4'>
-              <Button className='bg-opacity-20 bg-primary  shadow-md hover:bg-primary' onClick={() => setState({ sectionUpload: true })}>Add Section</Button>
+            <div className='flex justify-between items-center  mb-4'>
+              <Button variant='text' onClick={async () => await router.push('/projects')}><ChevronLeft />Буцах</Button>
+              <Button onClick={() => setState({ sectionUpload: true })}>Add Section</Button>
             </div>
             <span className='mx-2 text-base '>{state.selectedProject?.desc ?? ''}</span>
             <Table size='small'>
@@ -94,7 +99,7 @@ const ProjectInfo: FunctionComponent = () => {
                           <label htmlFor='audio'><Unarchive className='cursor-pointer' /></label>
                           <input type='file' name='images' id='audio' className='w-96' hidden onChange={(e) => handleUploadAudio(e, i)} />
                         </div>
-                        <LocalOffer className='cursor-pointer' onClick={() => setState({ tagModalOpen: true })} />
+                        <Launch className='cursor-pointer' onClick={() => setState({ tagModalOpen: true, tagSection: section })} />
                       </div>
                     </TableCell>
                   </TableRow>
@@ -110,7 +115,7 @@ const ProjectInfo: FunctionComponent = () => {
       )}
       <UploadSection isOpen={state.sectionUpload} onClose={() => setState({ sectionUpload: false })} />
       {state.sectionEdit !== undefined && state.sections !== undefined && <EditSection isOpen={state.sectionEdit !== undefined} onClose={() => setState({ sectionEdit: undefined })} sectionInfo={state.sections[state.sectionEdit]} />}
-      <TagModal isOpen={state.tagModalOpen} onClose={() => setState({ tagModalOpen: false, sectionEdit: undefined })} />
+      <TagModal isOpen={state.tagModalOpen} onClose={() => setState({ tagModalOpen: false, sectionEdit: undefined })} data={state.tagSection} fetchData={setState} />
     </Paper>
   )
 }

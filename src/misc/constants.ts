@@ -1,4 +1,4 @@
-import { Assignment, Group, ListAlt, Person } from '@material-ui/icons'
+import { Assignment, ListAlt } from '@material-ui/icons'
 import { MenuItem } from 'misc/types'
 
 export const menu: MenuItem[][] = [
@@ -12,16 +12,6 @@ export const menu: MenuItem[][] = [
       icon: ListAlt,
       text: 'Projects',
       route: '/projects'
-    },
-    {
-      icon: Group,
-      text: 'Customers',
-      route: '/customers'
-    },
-    {
-      icon: Person,
-      text: 'Roles',
-      route: '/roles'
     }
   ]
 ]

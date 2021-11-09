@@ -49,9 +49,9 @@ const Categories: FunctionComponent = () => {
 
   return (
     <div className='flex items-center w-full'>
-      {state.loading !== true && state.category !== undefined ? (
+      {!state.loading && state.category !== undefined ? (
         <div>
-          <Paper>
+          <Paper className='p-4'>
             <TableContainer>
               <TableHead>
                 <TableCell>Нэр</TableCell>
@@ -68,7 +68,7 @@ const Categories: FunctionComponent = () => {
             </TableContainer>
           </Paper>
           <Fab onClick={() => setState({ open: true })} className='absolute bottom-10 right-10 rounded-full'><Add /></Fab>
-          <Dialog open={state.open === true} onClose={handleClose}>
+          <Dialog open={state.open} onClose={handleClose}>
             <DialogTitle>Категори Нэмэх</DialogTitle>
             <DialogContent classes={{ root: 'gap-4 flex flex-col min-w-50' }}>
               <TextField

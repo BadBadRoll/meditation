@@ -37,7 +37,7 @@ const LoginPage: FunctionComponent = () => {
       <Head>
         <title>Meditation | Login</title>
       </Head>
-      <div className='flex flex-col justify-center items-center min-w-max h-screen bg-white bg-opacity-30'>
+      <div className='flex flex-col justify-center items-center min-w-max h-screen bg-white bg-opacity-30 shadow-2xl'>
         <LoginForm
           loading={loading}
           onLogin={handleLogin}

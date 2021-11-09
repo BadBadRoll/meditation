@@ -66,10 +66,10 @@ const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) 
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={cn(classes.root, 'bg-gradient-to-br from-indigo-400 via-blue-200 to-white')}>
+      <div className={cn(classes.root)}>
         <CssBaseline />
-        <AppBar className={cn(classes.appBar, { [classes.appBarShift]: open }, 'bg-transparent border-0 shadow-xl text-white')}>
-          <Toolbar className={classes.toolbar} classes={{ root: 'bg-transparent' }}>
+        <AppBar className={cn(classes.appBar, { [classes.appBarShift]: open }, 'border-0 shadow-xl ')}>
+          <Toolbar className={classes.toolbar} classes={{ root: '' }}>
             <IconButton
               edge='start'
               color='inherit'
@@ -97,7 +97,7 @@ const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) 
           open={open}
         >
           <div className={cn(classes.toolbarIcon, 'justify-end')}>
-            {open && <ChevronRight className='text-white mx-4 text-3xl cursor-pointer' onClick={handleDrawerClose} />}
+            {open && <ChevronRight className='mx-4 text-3xl cursor-pointer' onClick={handleDrawerClose} />}
           </div>
           <Divider />
           {menu.map((list: StateMenu[], idx: number) => (
@@ -109,9 +109,9 @@ const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) 
                     <Link key={idx.toString() + i.toString()} href={route} passHref>
                       <ListItem component='a' button onClick={() => { setAppBarTitle(formatRoute(route)) }} className='gap-2'>
                         <ListItemIcon>
-                          <ItemIcon className='text-white text-3xl ml-2' />
+                          <ItemIcon className='text-3xl ml-2' />
                         </ListItemIcon>
-                        <ListItemText primary={text} classes={{ root: 'text-white' }} />
+                        <ListItemText primary={text} />
                       </ListItem>
                     </Link>
                   )
@@ -121,7 +121,7 @@ const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) 
             </div>
           ))}
         </Drawer>
-        <main className={cn(classes.content, 'bg-gradient-to-br from-indigo-400 via-blue-200 to-white')}>
+        <main className={cn(classes.content)}>
           <div className={classes.appBarSpacer} />
           <Container maxWidth={false} className={cn(classes.container)}>
             {children}
