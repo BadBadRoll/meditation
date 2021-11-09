@@ -36,7 +36,7 @@ interface StateMenu extends MenuItem {
   badgeContent?: number
 }
 
-const AdminLayout: FunctionComponent = ({ children }) => {
+const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)

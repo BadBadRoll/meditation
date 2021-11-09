@@ -1,32 +1,53 @@
 import '../styles/globals.css'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useReducer } from 'react'
 import type { AppProps } from 'next/app'
 import AuthLayout from 'layouts/auth'
 import AdminLayout from 'layouts/admin'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
+import { loadState, removeState, saveState } from '@/misc/localStorage'
 dayjs.extend(relativeTime)
 
+interface StateType {
+  loaded?: boolean
+  token?: string | null
+}
+
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) => {
-  const token = typeof window !== 'undefined' ? localStorage.getItem('_token') : undefined
+  const [state, setState] = useReducer(
+    (state: StateType, newState: StateType) => ({ ...state, ...newState }),
+    {
+      loaded: false,
+      token: null
+    }
+  )
+
+  const init = async (): Promise<void> => {
+    const token: string | undefined | null = loadState('token')
+    setState({
+      token
+    })
+  }
+
+  useEffect(() => {
+    init().catch(err => console.log(err))
+  }, [])
 
   const isAuthPath = router.pathname === '/login' || router.pathname === '/register'
 
-  if ((token === undefined || token === null) && !isAuthPath) {
-    if (typeof window !== 'undefined') {
-    localStorage.setItem('redirectPath', router.asPath);
-  }
-    router.push('/login')
+  if ((state.token === undefined || state.token === null) && !isAuthPath && typeof window !== 'undefined') {
+    saveState('redirectPath', router.asPath)
+    router.push('/login').catch(err => console.log(err))
+    return <div />
   }
 
-  if ((token !== undefined && token !== null) && isAuthPath) {
-    const redirectPath = localStorage.getItem('redirectPath')
+  if ((state.token !== undefined && state.token !== null) && isAuthPath) {
+    const redirectPath = loadState('redirectPath')
     if (redirectPath !== undefined && redirectPath !== null) {
-localStorage.removeItem('redirectPath')
-      router.push(redirectPath)
+      removeState('redirectPath')
+      router.push(redirectPath).catch(err => console.log(err))
     } else {
-      router.push('/')
+      router.push('/').catch(err => console.log(err))
     }
     return <div />
   }
@@ -44,7 +65,7 @@ localStorage.removeItem('redirectPath')
             <Component {...pageProps} />
           </AuthLayout>
         ) : (
-          <AdminLayout>
+          <AdminLayout token={state.token}>
             <Component {...pageProps} />
           </AdminLayout>
         )

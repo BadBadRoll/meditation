@@ -17,13 +17,13 @@ const LoginPage: FunctionComponent = () => {
     try {
       const body = {
         email: email,
-        password:password 
+        password: password
       }
       await instance.post('/user/token/auth', body).then(res => {
         const token = res.data.data.token
-        const routePath = localStorage.getItem('redirectPath')
-        localStorage.setItem('_token', token)
-        router.push(routePath !== undefined && routePath !== null ? routePath : '/')
+        const routePath = localStorage.getItem('state_redirectPath')
+        localStorage.setItem('state_token', token)
+        router.push(routePath !== undefined && routePath !== null ? routePath : '/').catch(err => console.log(err))
       })
     } catch (err: any) {
       console.error(err.message)
