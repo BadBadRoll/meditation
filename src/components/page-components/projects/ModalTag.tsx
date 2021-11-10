@@ -1,7 +1,7 @@
 import { ProjectSection } from '@/misc/types'
 import instance from '@/service/axios/axiosConfig'
 import { Dialog, DialogContent, DialogTitle, DialogContentText, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, CircularProgress, Button, DialogActions, TextField } from '@material-ui/core'
-import { Close, LabelOff } from '@material-ui/icons'
+import { Close, Delete, Edit, LabelOff } from '@material-ui/icons'
 import { AxiosResponse } from 'axios'
 import { FunctionComponent, useReducer } from 'react'
 
@@ -38,6 +38,14 @@ const TagModal: FunctionComponent<Props> = ({ onClose, isOpen, data, fetchData }
     setState({ loading: false, addTagModal: false })
   }
 
+  const handleEdit = (): void => {
+    console.log('edit')
+  }
+
+  const handleDelete = (): void => {
+    console.log('delete')
+  }
+
   return (
     <Dialog open={isOpen} onClose={onClose} classes={{ paper: 'pb-6 min-w-50' }}>
       {data !== undefined ? (
@@ -58,6 +66,7 @@ const TagModal: FunctionComponent<Props> = ({ onClose, isOpen, data, fetchData }
                     <TableRow>
                       <TableCell>Хугацаа</TableCell>
                       <TableCell>Текст</TableCell>
+                      <TableCell />
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -65,6 +74,7 @@ const TagModal: FunctionComponent<Props> = ({ onClose, isOpen, data, fetchData }
                       <TableRow key={tag._id}>
                         <TableCell>{tag.timeStamp}</TableCell>
                         <TableCell>{tag.text}</TableCell>
+                        <TableCell><div className='flex gap-4'><Edit onClick={() => handleEdit()} className='cursor-pointer' /><Delete onClick={() => handleDelete()} className='cursor-pointer' /></div></TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

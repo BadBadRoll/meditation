@@ -1,13 +1,14 @@
 import { Project, ProjectSection } from '@/misc/types'
 import instance from '@/service/axios/axiosConfig'
 import { Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
-import { ChevronLeft, Edit, Launch, Unarchive } from '@material-ui/icons'
+import { ChevronLeft, Delete, Edit, Launch, Unarchive } from '@material-ui/icons'
 import { AxiosResponse } from 'axios'
 import { FunctionComponent, useEffect, useReducer } from 'react'
 import router from 'next/router'
 import UploadSection from '@/components/page-components/projects/SectionUpload'
 import EditSection from '@/components/page-components/projects/SectionEdit'
 import TagModal from '@/components/page-components/projects/ModalTag'
+import ConfirmDialog from '@/components/ui-components/Dialogs/ConfirmDialog'
 
 interface State {
   sectionEdit?: number
@@ -17,7 +18,9 @@ interface State {
   audio?: File
   sectionLoading?: boolean
   tagModalOpen?: boolean
-  tagSection?: ProjectSection
+  tagSection?: ProjectSection,
+  deleteSectionId?: string,
+  deleteConfirmModal?: boolean
 }
 
 const ProjectInfo: FunctionComponent = () => {
@@ -47,13 +50,10 @@ const ProjectInfo: FunctionComponent = () => {
 
     if (e.target.files !== undefined && state.sections !== undefined) {
       const audio: File = e.target.files[0]
-      console.log(audio)
       const sectionId = state.sections[i]._id
       const url = `/sections/upload?sectionId=${sectionId}`
-      console.log(url)
       const bodyFormData = new FormData();
       bodyFormData.append('test', audio)
-      console.log(bodyFormData)
       await instance.post(url, bodyFormData, {
         headers: {
           'Content-type': 'multipart/form-data', "Accept": "application/json",
@@ -63,6 +63,11 @@ const ProjectInfo: FunctionComponent = () => {
       fetchSections()
     }
   }
+
+  const handleDelete = () => {
+    instance.delete(`/sections/?id=${state.deleteSectionId}`)
+  }
+
   return (
     <Paper classes={{ root: 'bg-gray-100/25 border-none shadow-xl p-4 w-full h-full overflow-y-auto' }}>
       {state.sectionLoading !== false ? (
@@ -100,6 +105,7 @@ const ProjectInfo: FunctionComponent = () => {
                           <input type='file' name='images' id='audio' className='w-96' hidden onChange={(e) => handleUploadAudio(e, i)} />
                         </div>
                         <Launch className='cursor-pointer' onClick={() => setState({ tagModalOpen: true, tagSection: section })} />
+                        <Delete className='cursor-pointer' onClick={() => setState({ deleteSectionId: section._id, deleteConfirmModal: true })} />
                       </div>
                     </TableCell>
                   </TableRow>
@@ -116,6 +122,7 @@ const ProjectInfo: FunctionComponent = () => {
       <UploadSection isOpen={state.sectionUpload} onClose={() => setState({ sectionUpload: false })} />
       {state.sectionEdit !== undefined && state.sections !== undefined && <EditSection isOpen={state.sectionEdit !== undefined} onClose={() => setState({ sectionEdit: undefined })} sectionInfo={state.sections[state.sectionEdit]} />}
       <TagModal isOpen={state.tagModalOpen} onClose={() => setState({ tagModalOpen: false, sectionEdit: undefined })} data={state.tagSection} fetchData={setState} />
+      <ConfirmDialog open={state.deleteConfirmModal} title='Үргэлжлүүлэх дарсанаар устгагдах болно.' onClose={() => setState({ deleteSectionId: undefined, deleteConfirmModal: false })} onConfirm={handleDelete} />
     </Paper>
   )
 }
