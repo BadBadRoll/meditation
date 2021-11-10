@@ -59,8 +59,8 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.email === true && formik.errors.email !== undefined}
-          helperText={formik.touched.email === true ? formik.errors.email : undefined}
+          error={formik.touched.email && formik.errors.email !== undefined}
+          helperText={formik.touched.email ? formik.errors.email : undefined}
         />
         <TextField
           fullWidth
@@ -71,8 +71,8 @@ const LoginForm: FunctionComponent<Props> = ({ className, loading, onLogin }) =>
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.password === true && formik.errors.password !== undefined}
-          helperText={formik.touched.password === true ? formik.errors.password : undefined}
+          error={formik.touched.password && formik.errors.password !== undefined}
+          helperText={formik.touched.password ? formik.errors.password : undefined}
         />
         <Button disabled={loading} type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
           Нэвтрэх

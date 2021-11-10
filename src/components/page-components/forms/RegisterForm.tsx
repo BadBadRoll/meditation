@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import cn from 'classnames'
-import { Button, CircularProgress, TextField } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Link from 'next/link'
@@ -20,11 +20,10 @@ interface RegisterFormFields extends RegisterFields {
 
 interface Props {
   className?: string
-  loading: boolean
   onRegister: (fields: RegisterFields) => void
 }
 
-const RegisterForm: FunctionComponent<Props> = ({ className, loading, onRegister }) => {
+const RegisterForm: FunctionComponent<Props> = ({ className, onRegister }) => {
   const formik = useFormik<RegisterFormFields>({
     initialValues: {
       identifier: '',
@@ -74,8 +73,8 @@ const RegisterForm: FunctionComponent<Props> = ({ className, loading, onRegister
           value={formik.values.identifier}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.identifier === true && formik.errors.identifier !== undefined}
-          helperText={formik.touched.identifier === true ? formik.errors.identifier : undefined}
+          error={formik.touched.identifier && formik.errors.identifier !== undefined}
+          helperText={formik.touched.identifier ? formik.errors.identifier : undefined}
         />
         <TextField
           fullWidth
@@ -86,8 +85,8 @@ const RegisterForm: FunctionComponent<Props> = ({ className, loading, onRegister
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.password === true && formik.errors.password !== undefined}
-          helperText={formik.touched.password === true ? formik.errors.password : undefined}
+          error={formik.touched.password && formik.errors.password !== undefined}
+          helperText={formik.touched.password ? formik.errors.password : undefined}
         />
         <TextField
           fullWidth
@@ -98,13 +97,12 @@ const RegisterForm: FunctionComponent<Props> = ({ className, loading, onRegister
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.confirmPassword === true && formik.errors.confirmPassword !== undefined}
-          helperText={formik.touched.confirmPassword === true ? formik.errors.confirmPassword : undefined}
+          error={formik.touched.confirmPassword && formik.errors.confirmPassword !== undefined}
+          helperText={formik.touched.confirmPassword ? formik.errors.confirmPassword : undefined}
         />
         <div className='w-full flex justify-center h-10'>
-          <Button disabled={loading} type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
+          <Button type='submit' className='w-full text-white hover:bg-white hover:bg-opacity-30 hover:text-primary'>
             Бүртгүүлэх
-            {loading && <CircularProgress color='inherit' size='0.875rem' className='ml-1' />}
           </Button>
         </div>
         <div className='justify-end flex w-full'>
