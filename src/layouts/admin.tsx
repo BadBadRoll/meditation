@@ -31,6 +31,7 @@ import { menu } from 'misc/constants'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from '@/misc/mui-theme'
 import { ChevronRight } from '@material-ui/icons'
+import { removeState } from '@/misc/localStorage'
 
 interface StateMenu extends MenuItem {
   badgeContent?: number
@@ -60,7 +61,7 @@ const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) 
     return (capitalized)
   }
   const handleLogout = (): void => {
-    localStorage.removeItem('_token')
+    removeState('token')
     location.reload()
   }
 
@@ -92,7 +93,7 @@ const AdminLayout: FunctionComponent<{ token: string }> = ({ children, token }) 
         <Drawer
           variant='permanent'
           classes={{
-            paper: cn(classes.drawerPaper, { [classes.drawerPaperClose]: !open }, ' border-0 bg-white bg-opacity-20 shadow-xl')
+            paper: cn(classes.drawerPaper, { [classes.drawerPaperClose]: !open }, 'border-0')
           }}
           open={open}
         >

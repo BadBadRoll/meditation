@@ -31,7 +31,7 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps, router }) =>
 
   useEffect(() => {
     init().catch(err => console.log(err))
-  }, [])
+  }, [state.token])
 
   const isAuthPath = router.pathname === '/login' || router.pathname === '/register'
 

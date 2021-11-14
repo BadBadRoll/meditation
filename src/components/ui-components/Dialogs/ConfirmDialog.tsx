@@ -41,7 +41,7 @@ const ConfirmDialog: FunctionComponent<IProp> = (props) => {
           <div>
             {props.children}
           </div>
-          <div className='p-4 mt-8 flex justify-end'>
+          <div className='p-4 mt-8 flex justify-end gap-4'>
             <Button
               color={props.cancelColor ?? 'primary'}
               onClick={props.onClose}
@@ -50,7 +50,7 @@ const ConfirmDialog: FunctionComponent<IProp> = (props) => {
               {props.cancelText ?? 'Болих'}
             </Button>
             <Button
-              variant='contained'
+              variant='outlined'
               color={props.confirmColor ?? 'primary'}
               onClick={props.onConfirm}
               disabled={props.loading}

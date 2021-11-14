@@ -4,6 +4,7 @@ import Head from 'next/head'
 
 import { LoginFields, LoginForm } from '@/components/page-components/forms'
 import instance from '@/service/axios/axiosConfig'
+import { loadState, saveState } from '@/misc/localStorage'
 
 const LoginPage: FunctionComponent = () => {
   const router = useRouter()
@@ -21,13 +22,13 @@ const LoginPage: FunctionComponent = () => {
       }
       await instance.post('/user/token/auth', body).then(res => {
         const token = res.data.data.token
-        const routePath = localStorage.getItem('state_redirectPath')
-        localStorage.setItem('state_token', token)
-        router.push(routePath !== undefined && routePath !== null ? routePath : '/').catch(err => console.log(err))
+        saveState('token', token)
       })
     } catch (err: any) {
       console.error(err.message)
     } finally {
+      const routePath = loadState('redirectPath')
+      router.push((routePath !== undefined && routePath !== null) ? routePath : '/').catch(err => console.log(err))
       setLoading(false)
     }
   }

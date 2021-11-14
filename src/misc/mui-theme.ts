@@ -133,7 +133,9 @@ export const theme = createTheme({
     },
     MuiPaper: {
       rounded: {
-        borderRadius: '0.5rem'
+        borderRadius: '0.5rem',
+        border: 'none !important',
+        padding: '1rem'
       }
     },
     MuiPopover: {

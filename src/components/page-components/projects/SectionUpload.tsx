@@ -1,6 +1,6 @@
+import { ProjectSection } from '@/misc/types'
 import instance from '@/service/axios/axiosConfig'
 import { Button, Dialog, TextField } from '@material-ui/core'
-import router from 'next/router'
 import { FunctionComponent, useReducer } from 'react'
 
 interface Props {
@@ -8,28 +8,45 @@ interface Props {
   onClose?: () => void
   className?: string
   id?: string
+  fetchNeeded?: () => void
+  sectionInfo?: ProjectSection
 }
 
 interface State {
   newSectionName?: string
-  selectedSectionId?: string
   newSectionDescription?: string
 }
 
-const UploadSection: FunctionComponent<Props> = ({ isOpen, onClose, className, id }) => {
+const UploadSection: FunctionComponent<Props> = ({ isOpen, onClose, className, fetchNeeded, sectionInfo }) => {
   const [state, setState] = useReducer(
     (state: State, newState: State) => ({ ...state, ...newState }),
-    {}
+    {
+      newSectionName: sectionInfo?.name,
+      newSectionDescription: sectionInfo?.desc
+    }
   )
 
   const uploadTask = (): void => {
-    const id = router.query.projectId
     const body = {
       name: state.newSectionName,
-      desc: state.newSectionDescription,
-      projectId: id
+      desc: state.newSectionDescription
     }
-    instance.post('/sections', body).catch(err => console.log(err))
+
+    if (sectionInfo !== undefined && sectionInfo !== null) {
+      instance.put(`/sections?=${sectionInfo._id}`, body).then(() => {
+        fetchNeeded()
+        setState({ newSectionName: undefined, newSectionDescription: undefined })
+        onClose()
+      }
+      ).catch(err => console.log(err))
+    } else {
+      instance.post('/sections', body).then(() => {
+        fetchNeeded()
+        setState({ newSectionName: undefined, newSectionDescription: undefined })
+        onClose()
+      }
+      ).catch(err => console.log(err))
+    }
   }
   return (
     <Dialog open={isOpen ?? false} onClose={onClose} classes={{ paper: 'bg-white p-8 md:w-96' }} className={className}>
